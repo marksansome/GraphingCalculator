@@ -6,9 +6,14 @@ import numbers
 #postOrder processing of the tree
 def postOrderProcess(root):
 	#stands for not a number
-	nAn = not isinstance(root, numbers.Number)
+	nAn = not isinstance(Tree.getAtIndex(root), numbers.Number)
 	if nAn:
-		postOrderProcess(Tree.leftChildIndex(root))
-		postOrderProcess(Tree.rightChildIndex(root))
+		#verifrying there's something to deal with empty slots
+		if not Tree.getAtIndex(Tree.leftChildIndex(root)) == None:
+			postOrderProcess(Tree.leftChildIndex(root))
+
+		#same for right child
+		if not Tree.getAtIndex(Tree.rightChildIndex(root)) == None:
+			postOrderProcess(Tree.rightChildIndex(root))
 	else:
-		Calculation.process(root)
+		Calculation.process(Tree.parentIndex(root))

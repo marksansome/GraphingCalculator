@@ -4,6 +4,7 @@ from Global import Tree
 #process one node that is parent of operands nodes
 def process(nodeIndex):
 	#TODO:be careful about types, we need to make sure we're working with integers, but this need to be handled beforehand
+	print "NODE INDEX: " + str(nodeIndex)
 	left = int(Tree.getAtIndex(Tree.leftChildIndex(nodeIndex)))
 	right = int(Tree.getAtIndex(Tree.rightChildIndex(nodeIndex)))
 	parent = Tree.getAtIndex(nodeIndex)
