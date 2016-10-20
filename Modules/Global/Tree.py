@@ -1,4 +1,5 @@
 
+table = [123, "+", 3, 4]
 def createTable():
 	table = []
 
@@ -15,4 +16,7 @@ def parentIndex(index):
 		return (index-1)/2
 
 def getAtIndex(index):
-	return "the good value at the index"
+	return table[index]
+
+def setAtIndex(index, value):
+	table[index] = value
