@@ -1,4 +1,4 @@
-#File for managing calculations at the finest (i.e bottom of the tree)
+#File responsible for managing calculations at the finest (i.e bottom of the tree)
 from Global import Tree
 
 #process one node that is parent of operands nodes
@@ -10,10 +10,9 @@ def process(nodeIndex):
 
 	result = calculate(parent, left, right)
 	Tree.setAtIndex(nodeIndex, result)
+	Tree.removeChilds(nodeIndex)
 
-	print result
-
-#calculate parent value given two operands child
+#calculate parent value given two operands child nodes
 def calculate(parent, left, right):
 	result = operators[parent](left, right)
 	return result

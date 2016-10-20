@@ -1,5 +1,6 @@
 
-table = [123, "+", 3, 4]
+table = [None, "+", 3, 4]
+
 def createTable():
 	table = []
 
@@ -20,3 +21,7 @@ def getAtIndex(index):
 
 def setAtIndex(index, value):
 	table[index] = value
+
+def removeChilds(index):
+	setAtIndex(leftChildIndex(index), None)
+	setAtIndex(rightChildIndex(index), None)
