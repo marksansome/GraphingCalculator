@@ -2,4 +2,7 @@
 
 from Testing import *
 
-assertTrue("yeah man",True)
+assertTrue("Some test",True)
+assertTrue("Some other test",False)
+
+printHash()

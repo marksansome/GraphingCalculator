@@ -13,15 +13,17 @@ UNDERLINE = '\033[4m'
 ENDC = '\033[0m'
 
 #
-#   initTesting
-#   Create a hash table to report tests in.
-#   IN: NONE
-#   OUT: (Dictionary) Error table for testing
+#   testResults
+#   Hash table storing the number of successful and failed tests.
 #
-def initTesting():
-    dic = {}
-    dic['passed'] = 0
-    dic['failed'] = 0
+testResults = {
+    'passed':0,
+    'failed':0
+}
+
+def printResults():
+    print "Tests Passed: " + GREEN  + str(testResults['passed']) + ENDC
+    print "Tests Failed: " + ERROR  + str(testResults['failed']) + ENDC
 
 #
 #   assertTrue
@@ -86,6 +88,7 @@ def assertNotEqual (asrt, stmt, other):
 #   OUT: Print Statement
 #
 def printPass(asrt):
+    testResults['passed'] += 1
     print "The assertion: " + asrt + " - test" + GREEN + " Passed" + ENDC
 
 #
@@ -95,4 +98,5 @@ def printPass(asrt):
 #   OUT: Print Statement
 #
 def printFailure(asrt):
+    testResults['failed'] += 1
     print "The assertion: " + asrt + " - test" + ERROR + " Failed" + ENDC
