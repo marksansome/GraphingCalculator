@@ -1,12 +1,9 @@
 table = []
-for i in range(100):
-	table.append(None)
 
-table[1] = "*"
-table[2] = "*"
-table[3] = 4
-table[4] = 3
-table[5] = 2
+
+
+iterationAmount = 0
+
 
 #Given a node index, returns the index of its left child
 def leftChildIndex(index):
