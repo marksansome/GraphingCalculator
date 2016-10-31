@@ -1,5 +1,4 @@
 table = []
-
 #Given a node index, returns the index of its left child
 def leftChildIndex(index):
 	return 2*index
@@ -15,16 +14,16 @@ def parentIndex(index):
 	else:
 		return (index-1)/2
 
-#Given a node index, returns the value at this index
-def getAtIndex(index):
-	return table[index]
-
-#Given a node index, sets the value at this index
-def setAtIndex(index, value):
-	table[index] = value
+# #Given a node index, returns the value at this index
+# def getAtIndex(index):
+# 	return table[index]
+#
+# #Given a node index, sets the value at this index
+# def setAtIndex(index, value):
+# 	table[index] = value
 
 #Given a node index, removes its children
-def removeChilds(index):
-	setAtIndex(leftChildIndex(index), None)
-	setAtIndex(rightChildIndex(index), None)
+def removeChilds(tree,index):
+	tree[leftChildIndex(index)] = None
+	tree[rightChildIndex(index)] = None
 
