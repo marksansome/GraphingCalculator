@@ -5,7 +5,22 @@ import graphing
 import tkMessageBox
 #constant width of each button (not)
 
-#add value to entry box 
+
+def generateList(rangeEntry, interval):
+	x = [];
+	rangeEntry = int(rangeEntry)
+	interval = int(interval)
+	for i in range(-rangeEntry, rangeEntry + 1, interval):
+		x.append(i)
+	return x
+
+def generateGraph(root, entry, rangeEntry, interval):
+	x = generateList(rangeEntry, interval)
+	#fixy
+	y = [100,50,25,12,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
+	graphing.graph(root,x,y)
+	return
+
 def AddToEntry(entry, value):
 	entry.insert(entry.index(INSERT), value)
 
@@ -13,23 +28,27 @@ def AddToEntry(entry, value):
 def AddToEntryBrackets(entry, value):
 	entry.insert(entry.index(INSERT), value)
 	entry.icursor(entry.index(INSERT)-1)
+
 def UI():
 	root = Tk()
 	BUTTON_WIDTH = 5
 
+	#lambda: parseString(entry.get())
 	root.title('Name')
 	frame = Frame(root)
 	entryFrame = Frame(root)
 	space = Frame(frame, width = 20, height = 4)
-	entry = Entry(entryFrame, width = 80)
-	goButton = Button(entryFrame, text = "Go", command = lambda: parseString(entry.get()))
+	entry = Entry(entryFrame, width = 40)
+	rangeEntry = Entry(entryFrame)
+	rangeEntry.insert(0, "10")
+	interval = Spinbox(entryFrame, increment = 1, from_ = 1, to = 100)
+	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(root, entry.get(), rangeEntry.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
+	interval.grid(row = 0, column = 2, padx = 0)
+	rangeEntry.grid(row = 0, column = 3, padx = 0)
 	entry.focus_set()
-	#graph = Frame(root , width = 400, height = 500)
-	#graph.grid(row = 3, column =2)
-	graphing.graph(root,[1,2,3,4,5], [1,2,3,4,5])
 
 	num = [None]*10
 	operator = [None]*100
