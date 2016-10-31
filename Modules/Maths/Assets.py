@@ -18,14 +18,16 @@ def replaceVariables(variable, value, table):
 #Iterates and create a table from the low boundary to the up boundary
 #TODO:maybe we need to check wheter the boundaries are valid or not
 def iteratesDomain(variable, table):
+	preimage = []
 	image = []
 	j = float(domainLowBound)
 	# Cause of int rounding inside "range", we need to set the last value, that's why the + 1 is there
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
+		preimage.append(j)
 		temp = replaceVariables(variable, j, table)
 		image.append(TreeProcessing.processLoop(temp))
 		j += interval
 		i += 1
 
 	#TODO:write in the dic
-	return image
+	return [preimage, image]
