@@ -20,8 +20,9 @@ def postOrderProcess(tree, root):
 		Calculation.process(tree, Tree.parentIndex(root))
 
 #Loop to process over and over again until there's a final result
-def processLoop():
-	tree = list(Tree.table)
+def processLoop(main):
+	#TODO: PULLOP this is where I get the table
+	tree = list(main)
 	while not isinstance(tree[1], numbers.Number):
 		postOrderProcess(tree, 1)
 	return tree[1]

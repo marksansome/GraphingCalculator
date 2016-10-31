@@ -1,3 +1,4 @@
+#TODO:this will need to be removed
 table = []
 #Given a node index, returns the index of its left child
 def leftChildIndex(index):
