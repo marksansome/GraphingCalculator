@@ -1,7 +1,6 @@
 table = []
 
 
-
 iterationAmount = 0
 
 

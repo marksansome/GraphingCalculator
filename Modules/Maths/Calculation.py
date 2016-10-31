@@ -4,6 +4,7 @@ import math
 
 #process one node that is parent of operands nodes
 def process(nodeIndex):
+	#security layer
 	try:
 		print "Processing " + str(nodeIndex)
 		#TODO:be careful about types, we need to make sure we're working with integers, but this need to be handled beforehand
@@ -46,10 +47,12 @@ def division(left, right):
 
 def sinus(left, right):
 	#Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.sin(left)
-	elif left == None:
-		return math.sin(right)
+	#if right == None:
+	print "mabite"
+	print left
+	return math.sin(float(left))
+##	elif left == None:
+	#	return math.sin(right)
 
 # map the inputs to the function blocks
 operators = {"+" : addition,

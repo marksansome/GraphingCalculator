@@ -3,7 +3,7 @@ from Global import Tree
 from Maths import Calculation
 import numbers
 
-#postOrder processing of the tree
+#Processing the tree and make calculations of the bottom values of the tree
 def postOrderProcess(root):
 
 	#TODO:remove this?
@@ -25,10 +25,10 @@ def postOrderProcess(root):
 			postOrderProcess(Tree.rightChildIndex(root))
 	else:
 		Calculation.process(Tree.parentIndex(root))
-	#debug scope
+	#TODO:scope testing
 	print Tree.table
 
-#Tentative
+#Loop to process over and over again until there's a final result
 def processLoop():
 	while not isinstance(Tree.getAtIndex(1), numbers.Number):
 		postOrderProcess(1)
