@@ -9,14 +9,16 @@ import tkMessageBox
 def generateList(rangeEntry, interval):
 	x = [];
 	rangeEntry = int(rangeEntry)
-	interval = int(interval)
-	for i in range(-rangeEntry, rangeEntry + 1, interval):
+	interval = float(interval)
+	i = -1 * rangeEntry
+	while(i <= rangeEntry):
 		x.append(i)
+		i += interval
 	return x
 
 def generateGraph(root, entry, rangeEntry, interval):
 	x = generateList(rangeEntry, interval)
-	#fixy
+	
 	y = [100,50,25,12,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
 	graphing.graph(root,x,y)
 	return
@@ -41,7 +43,7 @@ def UI():
 	entry = Entry(entryFrame, width = 40)
 	rangeEntry = Entry(entryFrame)
 	rangeEntry.insert(0, "10")
-	interval = Spinbox(entryFrame, increment = 1, from_ = 1, to = 100)
+	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(root, entry.get(), rangeEntry.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
