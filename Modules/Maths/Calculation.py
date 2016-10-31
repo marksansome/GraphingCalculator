@@ -51,10 +51,10 @@ def sinus(left, right):
 		return math.sin(right)
 
 # map the inputs to the function blocks
-operators = {"+" : addition,
-			 "*" : multiplication,
-			 "-" : substraction,
-			 "/" : division,
-			 "sin": sinus,
-
+operators = {
+	"+" : addition,
+	"*" : multiplication,
+	"-" : substraction,
+	"/" : division,
+	"sin": sinus
 }

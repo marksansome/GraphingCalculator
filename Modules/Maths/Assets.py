@@ -1,11 +1,11 @@
-from DataStructures import Tree
+from DataStructures import DocumentDictionary
 from Maths import TreeProcessing
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output graph and so on
 #TODO: not sure about file name?
-domainLowBound = -10
-domainUpBound = 10
-interval = 2
+domainLowBound = -100
+domainUpBound = 100
+interval = 10
 
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
@@ -29,5 +29,11 @@ def iteratesDomain(variable, table):
 		j += interval
 		i += 1
 
+
 	#TODO:write in the dic
-	return [preimage, image]
+	tableOfValues = {
+		"xValues":preimage,
+		"yValues":image
+	}
+	DocumentDictionary.setTableOfValues(DocumentDictionary.dictionary, tableOfValues)
+	return tableOfValues
