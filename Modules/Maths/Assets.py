@@ -5,7 +5,7 @@ from Maths import TreeProcessing
 #TODO: not sure about file name?
 domainLowBound = -10
 domainUpBound = 10
-step = 2
+interval = 2
 
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
@@ -21,10 +21,10 @@ def iteratesDomain(variable, table):
 	image = []
 	j = float(domainLowBound)
 	# Cause of int rounding inside "range", we need to set the last value, that's why the + 1 is there
-	for i in range(int((domainUpBound - domainLowBound) / step) + 1):
+	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
 		temp = replaceVariables(variable, j, table)
 		image.append(TreeProcessing.processLoop(temp))
-		j += step
+		j += interval
 		i += 1
 
 	#TODO:write in the dic
