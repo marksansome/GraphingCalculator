@@ -1,4 +1,4 @@
-from Global import Tree
+from DataStructures import Tree
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output graph and so on
 #TODO: not sure about file name?

@@ -1,5 +1,5 @@
 #File responsible for handling all the recursive parsing of the tree
-from Global import Tree
+from DataStructures import Tree
 from Maths import Calculation
 import numbers
 

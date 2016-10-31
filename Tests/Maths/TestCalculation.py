@@ -1,5 +1,5 @@
 from Maths import Calculation
-from Global import Tree
+from DataStructures import Tree
 from unittest import *
 import numbers
 
