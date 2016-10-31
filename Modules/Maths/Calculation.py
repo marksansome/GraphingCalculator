@@ -3,25 +3,24 @@ from Global import Tree
 import math
 
 #process one node that is parent of operands nodes
-def process(nodeIndex):
+def process(tree, nodeIndex):
+	#security layer
 	try:
-		print "Processing " + str(nodeIndex)
 		#TODO:be careful about types, we need to make sure we're working with integers, but this need to be handled beforehand
-		if Tree.getAtIndex(Tree.leftChildIndex(nodeIndex)) != None:
-			left = float(Tree.getAtIndex(Tree.leftChildIndex(nodeIndex)))
+		if tree[Tree.leftChildIndex(nodeIndex)] != None:
+			left = float(tree[Tree.leftChildIndex(nodeIndex)])
 		else:
 			left = None
-		if Tree.getAtIndex(Tree.rightChildIndex(nodeIndex)) != None:
-			right = float(Tree.getAtIndex(Tree.rightChildIndex(nodeIndex)))
+		if tree[Tree.rightChildIndex(nodeIndex)] != None:
+			right = float(tree[Tree.rightChildIndex(nodeIndex)])
 		else:
 			right = None
 
-		parent = Tree.getAtIndex(nodeIndex)
+		parent = tree[nodeIndex]
 
 		result = calculate(parent, left, right)
-		Tree.setAtIndex(nodeIndex, result)
-		Tree.removeChilds(nodeIndex)
-		print "Process finished for " + str(nodeIndex)
+		tree[nodeIndex] = result
+		Tree.removeChilds(tree, nodeIndex)
 	except ValueError:
 		print "Value Error"
 #calculate parent value given two operands child nodes
@@ -47,7 +46,7 @@ def division(left, right):
 def sinus(left, right):
 	#Handling both case left or right just in case, it's a "security" layer
 	if right == None:
-		return math.sin(left)
+		return math.sin(float(left))
 	elif left == None:
 		return math.sin(right)
 
