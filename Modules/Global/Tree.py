@@ -1,9 +1,5 @@
 table = []
 
-
-iterationAmount = 0
-
-
 #Given a node index, returns the index of its left child
 def leftChildIndex(index):
 	return 2*index
