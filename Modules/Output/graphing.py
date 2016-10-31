@@ -3,7 +3,8 @@ import Tkinter
 import tkMessageBox
 
 #printing points
-def drawPoints(x, y, scale, height, width, canvas):
+def drawPoints(x, y, height, width, canvas):
+	scale = width / (x[-1] + x[-1])
 	for i in range(len(x)):
 		x[i] = (x[i] * scale + width/2)
 		y[i] = (-y[i] * scale + height/2)
@@ -15,7 +16,6 @@ def drawPoints(x, y, scale, height, width, canvas):
 def graph(root, x, y):
 	height = 500
 	width = 400
-	scale = 10
 
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
@@ -25,6 +25,6 @@ def graph(root, x, y):
 	#button to quit
 	quitButton = Tkinter.Button(root, text ="Close Graphing Calculator", command = root.destroy)
 
-	drawPoints(x, y, scale, height, width, canvas)
+	drawPoints(x, y, height, width, canvas)
 	canvas.grid(row = 4, column = 0)
 	quitButton.grid()
