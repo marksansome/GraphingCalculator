@@ -5,11 +5,12 @@ dictionary = {
     'type' : "",
     'answer' : "",
     'scale' : "",
-    'domain' : "",
+    'lowerBound' : "",
+    'upperBound' : "",
     'range' : "",
     'derivative' : "",
-    'integral' : "",
     'tableOfValues' : "",
+    'tree' : "",
     'isError' : ""
 }
 
@@ -50,13 +51,22 @@ def getScale(dictionary):
     return dictionary['scale']
 
 #
-#   getDomain
-#   Get the value of domain in the document dictionary.
+#   getLowerBound
+#   Get the value of lower bound in the document dictionary.
 #   IN: (Dictionary) the document object.
 #   OUT: (String) name.
 #
-def getDomain(dictionary):
-    return dictionary['domain']
+def getLowerBound(dictionary):
+    return dictionary['lowerBound']
+
+#
+#   getUpperBound
+#   Get the value of upper bound in the document dictionary.
+#   IN: (Dictionary) the document object.
+#   OUT: (String) name.
+#
+def getUpperBound(dictionary):
+    return dictionary['upperBound']
 
 #
 #   getRange
@@ -77,15 +87,6 @@ def getDerivative(dictionary):
     return dictionary['derivative']
 
 #
-#   getIntegral
-#   Get the value of integral in the document dictionary.
-#   IN: (Dictionary) the document object.
-#   OUT: (String) name.
-#
-def getIntegral(dictionary):
-    return dictionary['integral']
-
-#
 #   getTableOfValues
 #   Get the value of tableOfValues in the document dictionary.
 #   IN: (Dictionary) the document object.
@@ -93,6 +94,15 @@ def getIntegral(dictionary):
 #
 def getTableOfValues(dictionary):
     return dictionary['tableOfValues']
+
+#
+#   getTree
+#   Get the value of tree in the document dictionary.
+#   IN: (Dictionary) the document object.
+#   OUT: (String) name.
+#
+def getTree(dictionary):
+    return dictionary['tree']
 
 #
 #   getIsError
@@ -140,13 +150,22 @@ def setScale(dictionary, val):
     dictionary['scale'] = val
 
 #
-#   setDomain
-#   Sets the domain value of the document dicitionary.
+#   setLowerBound
+#   Sets the lower domain bound value of the document dicitionary.
 #   IN: (Dictionary) the document object, (String) the value to update.
 #   OUT: NONE.
 #
-def setDomain(dictionary, val):
-    dictionary['domain'] = val
+def setLowerBound(dictionary, val):
+    dictionary['lowerBound'] = val
+
+#
+#   setUpperBound
+#   Sets the upper domain bound value of the document dicitionary.
+#   IN: (Dictionary) the document object, (String) the value to update.
+#   OUT: NONE.
+#
+def setUpperBound(dictionary, val):
+    dictionary['upperBound'] = val
 
 #
 #   setRange
@@ -167,15 +186,6 @@ def setDerivative(dictionary, val):
     dictionary['derivative'] = val
 
 #
-#   setIntegral
-#   Sets the intergral value of the document dicitionary.
-#   IN: (Dictionary) the document object, (String) the value to update.
-#   OUT: NONE.
-#
-def setIntegral(dictionary, val):
-    dictionary['integral'] = val
-
-#
 #   setTableOfValues
 #   Sets the table of values value of the document dicitionary.
 #   IN: (Dictionary) the document object, (String) the value to update.
@@ -183,6 +193,15 @@ def setIntegral(dictionary, val):
 #
 def setTableOfValues(dictionary, val):
     dictionary['tableOfValues'] = val
+
+#
+#   setTree
+#   Sets the tree value of the document dicitionary.
+#   IN: (Dictionary) the document object, (String) the value to update.
+#   OUT: NONE.
+#
+def setTree(dictionary, val):
+    dictionary['tree'] = val
 
 #
 #   setIsError
