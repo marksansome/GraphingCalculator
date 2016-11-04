@@ -156,6 +156,7 @@ def UI():
 	operator[25].grid(row = 3,column = 9)
 	operator[26].grid(row = 0,column = 10)
 	operator[27].grid(row = 1,column = 10)
+	root.wm_title("Ranch Calc 2.0")
 
 	root.mainloop()
 
