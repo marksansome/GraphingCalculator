@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
+#Filled in with default values
 dictionary = {
     'name' : "",
     'type' : "",
     'answer' : "",
-    'scale' : "",
-    'lowerBound' : "",
-    'upperBound' : "",
+    #TODO:rename scale
+    'scale' : 0.1,
+    'lowerBound' : -10,
+    'upperBound' : 10,
     'range' : "",
-    'derivative' : "",
-    'tableOfValues' : "",
-    'tree' : "",
+    'tableOfValues' : {
+        "xValues": None,
+        "yValues": None
+    },
+    'tree' : None,
     'isError' : ""
 }
 
@@ -76,15 +80,6 @@ def getUpperBound(dictionary):
 #
 def getRange(dictionary):
     return dictionary['range']
-
-#
-#   getDerivative
-#   Get the value of derivative in the document dictionary.
-#   IN: (Dictionary) the document object.
-#   OUT: (String) name.
-#
-def getDerivative(dictionary):
-    return dictionary['derivative']
 
 #
 #   getTableOfValues
@@ -175,15 +170,6 @@ def setUpperBound(dictionary, val):
 #
 def setRange(dictionary, val):
     dictionary['range'] = val
-
-#
-#   setDerivative
-#   Sets the derivative value of the document dicitionary.
-#   IN: (Dictionary) the document object, (String) the value to update.
-#   OUT: NONE.
-#
-def setDerivative(dictionary, val):
-    dictionary['derivative'] = val
 
 #
 #   setTableOfValues

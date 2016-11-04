@@ -1,9 +1,10 @@
 #!/usr/bin/python
 from Modules.Output import UI
-from Modules.Output import graphing
-from Modules.Maths	import Assets
+from Modules.Maths import Assets
+from Modules.DataStructures import DocumentDictionary
 
-#Testing replacments
+#TODO:remove that shit
+#Testing replacements with a temporary table for RANCHING FUSION
 table = []
 for i in range(30):
 	table.append("*")
@@ -12,8 +13,7 @@ for i in range(31, 100):
 	table.append("x")
 table[0] = None
 
-#print Assets.replaceVariables("x", 1, table)
-#print Assets.iteratesDomain("x", table)
-#Assets.initialise()
-Assets.iteratesDomain("x", table)
+DocumentDictionary.setTree(DocumentDictionary.dictionary, table)
+Assets.iteratesDomain("x")
+
 UI.UI()

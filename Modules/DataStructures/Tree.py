@@ -1,5 +1,3 @@
-#TODO:this will need to be removed
-table = []
 #Given a node index, returns the index of its left child
 def leftChildIndex(index):
 	return 2*index
@@ -15,6 +13,7 @@ def parentIndex(index):
 	else:
 		return (index-1)/2
 
+#Still keeping track of this incase of an Object version later on
 # #Given a node index, returns the value at this index
 # def getAtIndex(index):
 # 	return table[index]
