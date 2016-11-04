@@ -3,10 +3,13 @@ from Maths import TreeProcessing
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output graph and so on
 #TODO: not sure about file name?
-domainLowBound = -100
-domainUpBound = 100
-interval = 10
+domainLowBound, domainUpBound, interval = 0
 
+#Gets the values from the dictionary
+def initialise():
+	domainLowBound = DocumentDictionary.getLowerBound(DocumentDictionary.dictionary)
+	domainUpBound = DocumentDictionary.getLowerBound(DocumentDictionary.dictionary)
+	interval = DocumentDictionary.getScale(DocumentDictionary.dictionary)
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
 	result = list(table)
