@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from Tkinter import *
-import graphing
+from Modules.Output import graphing
 from Modules.DataStructures import DocumentDictionary
 
 import tkMessageBox

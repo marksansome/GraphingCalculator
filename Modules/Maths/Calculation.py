@@ -1,5 +1,5 @@
 #File responsible for managing calculations at the finest (i.e bottom of the tree)
-from DataStructures import Tree
+from Modules.DataStructures import Tree
 import math
 
 #process one node that is parent of operands nodes

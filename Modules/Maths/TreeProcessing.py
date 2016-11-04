@@ -1,6 +1,6 @@
 #File responsible for handling all the recursive parsing of the tree
-from DataStructures import Tree
-from Maths import Calculation
+from Modules.DataStructures import Tree
+from Modules.Maths import Calculation
 import numbers
 
 tree = []

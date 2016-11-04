@@ -6,10 +6,11 @@ from Modules.DataStructures import DocumentDictionary
 
 #printing points
 def drawPoints(x, y, height, width, canvas):
-	scale = width / (DocumaxX - minX)
+	scaleY = height / (max(y) - min(y))
+	scaleX = width / (float(DocumentDictionary.getUpperBound(DocumentDictionary.dictionary)) - (float(DocumentDictionary.getLowerBound(DocumentDictionary.dictionary))))
 	for i in range(len(x)):
-		x[i] = (x[i] * scale + width/2)
-		y[i] = (-y[i] * scale + height/2)
+		x[i] = (x[i] * scaleX + width/2)
+		y[i] = (-y[i] * scaleY + height/2)
 		canvas.create_oval(x[i], y[i], x[i], y[i])
 
 	for i in range(len(x) - 1):
