@@ -1,26 +1,35 @@
 #!/usr/bin/python
 from Tkinter import *
-import graphing
+from Modules.Output import graphing
+from Modules.DataStructures import DocumentDictionary
 
 import tkMessageBox
 #constant width of each button (not)
 
-
-def generateList(rangeEntry, interval):
+'''
+def generateList():
 	x = [];
-	rangeEntry = int(rangeEntry)
+
+	minX = float(minX)
+	maxX = float(maxX)
 	interval = float(interval)
-	i = -1 * rangeEntry
-	while(i <= rangeEntry):
+	i = minX
+	while(i <= maxX):
 		x.append(i)
 		i += interval
 	return x
+'''
 
-def generateGraph(root, entry, rangeEntry, interval):
-	x = generateList(rangeEntry, interval)
+def generateGraph(root, entry, minRange, maxRange, interval):
 	
-	y = [100,50,25,12,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
-	graphing.graph(root,x,y)
+	DocumentDictionary.setUpperBound(DocumentDictionary.dictionary, maxRange) 
+	DocumentDictionary.setLowerBound(DocumentDictionary.dictionary, minRange) 
+	DocumentDictionary.setScale(DocumentDictionary.dictionary, interval)
+	DocumentDictionary.setType(DocumentDictionary.dictionary, entry)
+	#x = generateList()
+	#y = [10,9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
+
+	graphing.graph(root)
 	return
 
 def AddToEntry(entry, value):
@@ -41,15 +50,22 @@ def UI():
 	entryFrame = Frame(root)
 	space = Frame(frame, width = 20, height = 4)
 	entry = Entry(entryFrame, width = 40)
-	rangeEntry = Entry(entryFrame)
-	rangeEntry.insert(0, "10")
+	minLabel = Label(entryFrame, text = "Min")
+	minRange = Entry(entryFrame)
+	minRange.insert(0, "-10")
+	maxLabel = Label(entryFrame, text = "Max")
+	maxRange = Entry(entryFrame)
+	maxRange.insert(0, "10")
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
-	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(root, entry.get(), rangeEntry.get(), interval.get()))
+	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
 	interval.grid(row = 0, column = 2, padx = 0)
-	rangeEntry.grid(row = 0, column = 3, padx = 0)
+	minLabel.grid(row = 0, column = 3)
+	minRange.grid(row = 0, column = 4)
+	maxLabel.grid(row = 0, column = 5)
+	maxRange.grid(row = 0, column = 6)
 	entry.focus_set()
 
 	num = [None]*10
