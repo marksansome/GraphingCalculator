@@ -15,8 +15,9 @@ MathFunctions = {
     'arctanh' : "",
     'sqrt' : "",
     '^' : "",
-    'pi' : ,
+    #TODO: replace pi just like variables?
+    'pi' : "",
     'log' : "",
     'ln' : "",
-    'e^x' : ""
+    'e^' : ""
 }
