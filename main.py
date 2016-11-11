@@ -5,7 +5,7 @@ from Modules.Maths	import Assets
 
 #Testing replacments
 table = []
-for i in range(30):
+for i in range(20):
 	table.append("*")
 
 for i in range(31, 100):
