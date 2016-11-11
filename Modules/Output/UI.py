@@ -7,7 +7,7 @@ import tkMessageBox
 #constant width of each button (not)
 
 '''
-def generateList():
+def generateList():				#USED FOR TESTING
 	x = [];
 
 	minX = float(minX)
