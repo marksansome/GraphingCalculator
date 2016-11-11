@@ -8,13 +8,13 @@ from Modules.DataStructures import DocumentDictionary
 def drawPoints(x, y, height, width, canvas):
 	scaleY = height / 20
 	scaleX = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
-	print scaleX
-	print DocumentDictionary.getScale()
 	X = []
 	Y = []
 	for i in range(len(x)):
+		print x[i], ",", y[i]
 		X.append(x[i] * scaleX + width/2)
 		Y.append(-y[i] * scaleY + height/2)
+		print X[i] , "," , Y[i]
 		canvas.create_oval(X[i], Y[i], X[i], Y[i])
 
 	for i in range(len(x) - 1):
@@ -36,8 +36,7 @@ def graph(root):
 
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
-
-
+	
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
 	drawLines(x, height, width, canvas)
