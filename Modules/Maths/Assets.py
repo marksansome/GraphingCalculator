@@ -48,6 +48,6 @@ def iteratesDomain(variable, table):
 
 	#Writing the table of values inside the global dictionary
 	DocumentDictionary.setTableOfValues(tableOfValues)
-	print tableOfValues
+	#print tableOfValues
 	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
