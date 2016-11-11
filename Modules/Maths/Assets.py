@@ -9,9 +9,9 @@ interval = 0.1
 
 #Gets the values from the dictionary
 def initialise():
-	domainLowBound = DocumentDictionary.getLowerBound(DocumentDictionary.dictionary)
-	domainUpBound = DocumentDictionary.getLowerBound(DocumentDictionary.dictionary)
-	interval = DocumentDictionary.getScale(DocumentDictionary.dictionary)
+	domainLowBound = DocumentDictionary.getLowerBound()
+	domainUpBound = DocumentDictionary.getLowerBound()
+	interval = DocumentDictionary.getScale()
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
 	result = list(table)
@@ -35,10 +35,9 @@ def iteratesDomain(variable, table):
 		i += 1
 
 
-	#TODO:write in the dic
 	tableOfValues = {
 		"xValues":preimage,
 		"yValues":image
 	}
-	DocumentDictionary.setTableOfValues(DocumentDictionary.dictionary, tableOfValues)
+	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
