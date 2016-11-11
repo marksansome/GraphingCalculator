@@ -3,6 +3,12 @@ from Modules.Maths import TreeProcessing
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output as a graph and so on
 
+#Gets the values from the dictionary
+def initialise():
+	domainLowBound = DocumentDictionary.getLowerBound()
+	domainUpBound = DocumentDictionary.getLowerBound()
+	interval = DocumentDictionary.getScale()
+
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
 	result = list(table)
@@ -41,5 +47,7 @@ def iteratesDomain(variable, table):
 	}
 
 	#Writing the table of values inside the global dictionary
-	DocumentDictionary.setTableOfValues(DocumentDictionary.dictionary, tableOfValues)
+	DocumentDictionary.setTableOfValues(tableOfValues)
 	print tableOfValues
+	DocumentDictionary.setTableOfValues(tableOfValues)
+	return tableOfValues

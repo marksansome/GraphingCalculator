@@ -21,11 +21,11 @@ def generateList():
 '''
 
 def generateGraph(root, entry, minRange, maxRange, interval):
-	
-	DocumentDictionary.setUpperBound(DocumentDictionary.dictionary, maxRange) 
-	DocumentDictionary.setLowerBound(DocumentDictionary.dictionary, minRange) 
-	DocumentDictionary.setScale(DocumentDictionary.dictionary, interval)
-	DocumentDictionary.setType(DocumentDictionary.dictionary, entry)
+
+	DocumentDictionary.setUpperBound(maxRange)
+	DocumentDictionary.setLowerBound(minRange)
+	DocumentDictionary.setScale(interval)
+	DocumentDictionary.setType(entry)
 	#x = generateList()
 	#y = [10,9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
 
@@ -158,6 +158,3 @@ def UI():
 	operator[27].grid(row = 1,column = 10)
 
 	root.mainloop()
-
-
-

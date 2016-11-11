@@ -7,7 +7,7 @@ from Modules.DataStructures import DocumentDictionary
 #printing points
 def drawPoints(x, y, height, width, canvas):
 	scaleY = height / (max(y) - min(y))
-	scaleX = width / (float(DocumentDictionary.getUpperBound(DocumentDictionary.dictionary)) - (float(DocumentDictionary.getLowerBound(DocumentDictionary.dictionary))))
+	scaleX = width / (float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound())))
 	for i in range(len(x)):
 		x[i] = (x[i] * scaleX + width/2)
 		y[i] = (-y[i] * scaleY + height/2)
@@ -19,7 +19,7 @@ def drawPoints(x, y, height, width, canvas):
 def graph(root):
 	height = 500
 	width = 400
-	
+
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
 	horLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
@@ -27,8 +27,8 @@ def graph(root):
 
 	#button to quit
 	quitButton = Tkinter.Button(root, text ="Close Graphing Calculator", command = root.destroy)
-	x = DocumentDictionary.getTableOfValues(DocumentDictionary.dictionary)['xValues']
-	y = DocumentDictionary.getTableOfValues(DocumentDictionary.dictionary)['yValues']
+	x = DocumentDictionary.getTableOfValues()['xValues']
+	y = DocumentDictionary.getTableOfValues()['yValues']
 	drawPoints(x, y, height, width, canvas)
 	canvas.grid(row = 4, column = 0)
 	quitButton.grid()
