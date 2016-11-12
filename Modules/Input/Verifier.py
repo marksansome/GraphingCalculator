@@ -20,6 +20,9 @@ def verify(string):
     while i < length:
         fop = False
 
+        #if string[i] == '(':
+        #    bracket = True
+
         #   Open always on empty brackets
         if bracketOpen == 0:
             pStr += str("(")
@@ -61,7 +64,7 @@ def verify(string):
         bracketOpen -= 1
     return pStr
 
-eq = "3^(3^2)"
-#eq = "2*3+2"
+#eq = "3^(3^2)"
+eq = "2*3+2"
 #eq = "2*3*2"
 print verify(eq)
