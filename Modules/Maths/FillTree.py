@@ -59,11 +59,10 @@ def parseString(equation, index):
 		parseString(equation[position+1:length-1], index * 2 + 1)
 	return
 
-#equation = "(2++2)"
 #equation = "(sin(cos(0)))"
 #equation = "((5+6)*(9+8))"
-equation = "((2+2)*(sin(4.0+5.0)))"
-#equation = "log(10)(5+5)"
+#equation = "((2+2)*(sin(4.0+5.0)))"
+equation = "(log(5+5))"
 #equation = "(arcsinh(cos(pi)))"
 parseString(equation,1)
 print myList
