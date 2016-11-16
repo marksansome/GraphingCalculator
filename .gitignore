@@ -147,7 +147,7 @@ fabric.properties
 
 
 ### OSX template
-*.DS_Store
+.DS_Store
 .AppleDouble
 .LSOverride
 
