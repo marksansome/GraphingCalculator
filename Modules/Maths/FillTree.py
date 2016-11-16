@@ -1,22 +1,5 @@
 #!/usr/bin/python
-#from Modules.DataStructures import MathFunctions
-MathFunctions = {
-    'sin' : "",
-    'cos' : "",
-    'tan' : "",
-    'arcsin' : "",
-    'arccos' : "",
-    'arctan' : "",
-    'sinh' : "",
-    'cosh' : "",
-    'tanh' : "",
-    'arcsinh' : "",
-    'arccosh' : "",
-    'arctanh' : "",
-    'sqrt' : "",
-    'log' : "",
-    'ln' : "",
-}
+MathFunctions = ['arcsinh', 'arccosh', 'arctanh', 'sinh', 'cosh', 'tanh', 'sin', 'cos', 'tan', 'arcsin', 'arccos', 'arctan', 'sqrt', 'log', 'ln']
 
 myList = [None] * 20
 
@@ -39,30 +22,29 @@ def isOperator(c):
 	return 0
 
 def parseString(equation, index):
-	length = len(equation)
-	for function in MathFunctions:
-		size = len(function)
-		if function in equation[1:size+1]:
-			myList[index] = function
-			parseString(equation[size+1:length], index*2)
-			return
-
-	position = split(equation)
-	if(position != -1):
-		parent = equation[position]
-		myList[index] = parent
-	else:
-		myList[index] = equation.strip('()')
-	if(position != -1):
-		print equation
-		parseString(equation[1:position], index * 2)
-		parseString(equation[position+1:length-1], index * 2 + 1)
-	return
+    length = len(equation)
+    for i,function in enumerate(MathFunctions):
+        size = len(function)
+        if function in equation[1:size+1]:
+            myList[index] = function
+            parseString(equation[size+1:length], index*2)
+            return
+    position = split(equation)
+    if(position != -1):
+        parent = equation[position]
+        myList[index] = parent
+    else:
+        myList[index] = equation.strip('()')
+    if(position != -1):
+        parseString(equation[1:position], index * 2)
+        parseString(equation[position+1:length-1], index * 2 + 1)
+    return
 
 #equation = "(sin(cos(0)))"
 #equation = "((5+6)*(9+8))"
 #equation = "((2+2)*(sin(4.0+5.0)))"
-equation = "(log(5+5))"
+#equation = "(log(5+5))"
 #equation = "(arcsinh(cos(pi)))"
+#equation = '(tanh(arctanh(cos(pi))))'
 parseString(equation,1)
 print myList
