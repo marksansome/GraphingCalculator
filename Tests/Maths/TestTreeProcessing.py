@@ -12,7 +12,7 @@ Tree.table[0] = None
 
 
 
-print "Result: " + str(TreeProcessing.processLoop()) + "\n\n"
+print "Result: " + str(TreeProcessing.processLoop(Tree.table)) + "\n\n"
 
 #tests
 Tree.table = []
@@ -25,6 +25,6 @@ Tree.table.insert(3, 3)
 Tree.table.insert(4, 0.5)
 
 
-print "Result: " + str(TreeProcessing.processLoop())
+print "Result: " + str(TreeProcessing.processLoop(Tree.table))
 
 
