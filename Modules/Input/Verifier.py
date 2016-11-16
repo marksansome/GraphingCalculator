@@ -109,7 +109,7 @@ def verify(parse):
     #   For each BEDMAS operation
     for i in range(4,0,-1):
         k = 0
-        setNestedBrackets(parse)
+        #setNestedBrackets(parse)
         #print parse
         #   For each element of the parse'd list
         while k < parseLength:
