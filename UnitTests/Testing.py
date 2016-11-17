@@ -7,9 +7,14 @@ ERROR = '\033[91m'
 HEADER = '\033[95m'
 OKBLUE = '\033[94m'
 WARNING = '\033[93m'
+GREY = '\033[90m'
 BOLD = '\033[1m'
 ITALIC = '\033[3m'
 UNDERLINE = '\033[4m'
+BLINK = '\033[5m'
+BLACKONBLACK = '\033[7m'
+WHITE = '\033[97m'
+DARKYELLOW = '\033[33m'
 
 ENDC = '\033[0m'
 
@@ -97,6 +102,7 @@ def assertEqual (asrt, stmt, other):
         return True
     else:
         printFailure(asrt)
+        print DARKYELLOW + "Asrt 1: " + str(stmt) + " does not equal Asrt 2: " + str(other) + ENDC
         return False
 
 #
