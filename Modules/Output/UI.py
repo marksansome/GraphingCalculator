@@ -7,16 +7,27 @@ import tkFont
 import tkMessageBox
 
 def generateGraph(op, var, root, entry, minRange, maxRange, interval):
-
-	DocumentDictionary.setUpperBound(maxRange)
-	DocumentDictionary.setLowerBound(minRange)
-	DocumentDictionary.setScale(interval)
-	DocumentDictionary.setType(entry)
-	#graphing.graph(root)
-	op.append(entry)
-	history = apply(OptionMenu, (root, var) + tuple(op))
-	history.grid(row = 0, column = 7)
+	if checkRanges(minRange, maxRange): 
+		DocumentDictionary.setUpperBound(maxRange)
+		DocumentDictionary.setLowerBound(minRange)
+		DocumentDictionary.setScale(interval)
+		DocumentDictionary.setType(entry)
+		#graphing.graph(root)
+		op.append(entry)
+		history = apply(OptionMenu, (root, var) + tuple(op))
+		history.grid(row = 0, column = 7)
+		errorVar.set("")
 	return
+
+def checkRanges(minRange, maxRange):
+	if minRange > maxRange:
+		showError()
+		return False
+	else:
+		return True
+
+def showError():
+	errorVar.set("ERROR")
 
 def replaceEntry(entry, value):
 	entry.delete(0,END)
@@ -40,7 +51,8 @@ def UI():
 	variable.set(OPTIONS[0])
 
 	boldFont = tkFont.Font(weight = "bold")
-
+	global errorVar
+	errorVar = StringVar()
 	#lambda: parseString(entry.get())
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
@@ -62,6 +74,8 @@ def UI():
 	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
 	historyButton.grid(row = 0, column = 8)
 
+	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
+
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
@@ -72,7 +86,7 @@ def UI():
 	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
 	maxRange.grid(row = 0, column = 7)
-
+	errorLabel.grid(row = 1, column = 3)
 	entry.focus_set()
 
 	num = [None]*10
