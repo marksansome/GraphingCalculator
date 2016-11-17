@@ -21,8 +21,8 @@ def postOrderProcess(tree, root):
 
 #Loop to process over and over again until there's a final result
 def processLoop(main):
-	#TODO: PULLOP this is where I get the table
-	tree = list(main)
+	#TODO: copy tree or not, error could hide here
+	tree = main
 	while not isinstance(tree[1], numbers.Number):
 		postOrderProcess(tree, 1)
 	return tree[1]
