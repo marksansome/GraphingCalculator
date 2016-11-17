@@ -23,6 +23,7 @@ def postOrderProcess(tree, root):
 def processLoop(main):
 	#TODO: copy tree or not, error could hide here
 	tree = main
+	print tree[1]
 	while not isinstance(tree[1], numbers.Number):
 		postOrderProcess(tree, 1)
 	return tree[1]
