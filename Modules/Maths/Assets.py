@@ -3,12 +3,6 @@ from Modules.Maths import TreeProcessing
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output as a graph and so on
 
-#Gets the values from the dictionary
-def initialise():
-	domainLowBound = DocumentDictionary.getLowerBound()
-	domainUpBound = DocumentDictionary.getLowerBound()
-	interval = DocumentDictionary.getScale()
-
 #Replaces the variable named "variable" to the value "value" in the entire tree
 def replaceVariables(variable, value, table):
 	result = list(table)
@@ -18,14 +12,12 @@ def replaceVariables(variable, value, table):
 	return result
 
 #Iterates and create a table from the low boundary to the up boundary, given the variable as a string ("x" or "y" or ..)
-#TODO:maybe we need to check wheter the boundaries are valid or not
-def iteratesDomain(variable, table):
+def iteratesDomain(tree):
 	#Initialise and recovers data from the dictionnary
-	#TODO: Fix the global Dico thing
-	domainLowBound = -10 #float(DocumentDictionary.getLowerBound(DocumentDictionary.dictionary))
-	domainUpBound = 10 #float(DocumentDictionary.getLowerBound(DocumentDictionary.dictionary))
-	interval = 0.1 #float(DocumentDictionary.getScale(DocumentDictionary.dictionary))
-#	table = DocumentDictionary.getTree(DocumentDictionary.dictionary)
+	domainLowBound = float(DocumentDictionary.getLowerBound())
+	domainUpBound = float(DocumentDictionary.getUpperBound())
+	interval = float(DocumentDictionary.getScale())
+	table = tree
 
 	#Initiating the future loop
 	preimage = []
@@ -36,7 +28,7 @@ def iteratesDomain(variable, table):
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
 		preimage.append(j)
 		#Creates a temporary copy of the table representation of the tree so we keep untouched the "main" tree with variables
-		temp = replaceVariables(variable, j, table)
+		temp = replaceVariables("x", j, table)
 		image.append(TreeProcessing.processLoop(temp))
 		j += interval
 		i += 1
@@ -48,6 +40,15 @@ def iteratesDomain(variable, table):
 
 	#Writing the table of values inside the global dictionary
 	DocumentDictionary.setTableOfValues(tableOfValues)
-	print tableOfValues
-	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
+
+#GOOOOOOO LET'S RANCH IT UP, triggers the calculation process
+def go():
+	docTree = DocumentDictionary.getTree()
+	#If we have a variable in the tree, it means we have to iterate on a domain
+	if "x" in docTree:
+		iteratesDomain(docTree)
+	#If not we just expect a single number as an answer
+	else:
+		result = TreeProcessing.processLoop(docTree)
+		DocumentDictionary.setAnswer(result)

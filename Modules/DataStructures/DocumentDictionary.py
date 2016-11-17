@@ -7,7 +7,6 @@ dictionary = {
     'name' : "",
     'type' : "",
     'answer' : "",
-    #TODO:rename scale
     'scale' : 0.1,
     'lowerBound' : -10,
     'upperBound' : 10,
@@ -172,15 +171,6 @@ def setUpperBound(val):
 #
 def setRange(val):
     dictionary['range'] = val
-
-#
-#   setDerivative
-#   Sets the derivative value of the document dicitionary.
-#   IN: (String) the value to update.
-#   OUT: NONE.
-#
-def setDerivative(val):
-    dictionary['derivative'] = val
 
 #
 #   setTableOfValues
