@@ -1,8 +1,5 @@
-from Maths import Calculation
-from DataStructures import Tree
-from unittest import *
-import numbers
-
+from Modules.Maths import Calculation
+from Modules.DataStructures import Tree
 
 print "Need to find a unittest workout"
 #TODO:LOL CA MARCHE PAS J'SAIS PAS POURQUOI

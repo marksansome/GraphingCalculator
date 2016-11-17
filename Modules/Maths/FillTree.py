@@ -3,6 +3,14 @@ MathFunctions = ['arcsinh', 'arccosh', 'arctanh', 'sinh', 'cosh', 'tanh', 'sin',
 
 myList = [None] * 40
 
+#
+#	getList
+#	Return the list representation of a tree.
+#	NOTE: Left is (2 * i), Right is (2 * i) + 1
+#
+def getList():
+	return myList
+
 def split(equation):
 	parentheses = 0
 	count = -1
@@ -21,7 +29,13 @@ def isOperator(c):
 		return 1
 	return 0
 
-def parseString(equation, index):
+#
+#	parseString
+#	Calculates the list representation of a list.
+#	IN: (String) the equation. 
+#	NOTE: Left is (2 * i), Right is (2 * i) + 1. (See getList() to access the list)
+#
+def parseString(equation, index=1):
     length = len(equation)
     for i,function in enumerate(MathFunctions):
         size = len(function)
@@ -46,9 +60,14 @@ def parseString(equation, index):
 #equation = "(log(5+5))"
 #equation = "(arcsinh(cos(pi)))"
 #equation = '(tanh(arctanh(cos(pi))))'
+<<<<<<< HEAD
 #equation = "((2*x)+5)"
 #equation = "((5!^2)+(sin(8+2)))"
 #equation = "(((1.2+((x*2)/9))+8)+(tan((2*x)^2)))"
 equation = "(4+6)!"
 parseString(equation,1)
 print myList
+=======
+#parseString(equation,1)
+#print myList
+>>>>>>> e30716878e995df7c59f81a24a0884a3a29ce7b7

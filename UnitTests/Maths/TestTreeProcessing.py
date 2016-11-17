@@ -1,5 +1,5 @@
-from DataStructures import Tree
-from Maths import TreeProcessing
+from Modules.DataStructures import Tree
+from Modules.Maths import TreeProcessing
 #testing singles cases of TreeProcessing
 
 #tests for 30 additions of 30 2
@@ -26,5 +26,3 @@ Tree.table.insert(4, 0.5)
 
 
 print "Result: " + str(TreeProcessing.processLoop(Tree.table))
-
-
