@@ -18,4 +18,5 @@ table[0] = None
 #DocumentDictionary.setTree(DocumentDictionary.dictionary, table)
 Assets.iteratesDomain("x",table)
 '''
+
 UI()

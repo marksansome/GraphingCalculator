@@ -16,6 +16,7 @@ def drawPoints(x, y, height, width, canvas):
 		Y.append(-y[i] * scaleY + height/2)
 		print X[i] , "," , Y[i]
 		canvas.create_oval(X[i], Y[i], X[i], Y[i])
+		drawLines(X, height, width, canvas)
 
 	for i in range(len(x) - 1):
 		canvas.create_line(X[i], Y[i], X[i+1], Y[i+1])
@@ -36,10 +37,9 @@ def graph(root):
 
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
-	
+
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
-	drawLines(x, height, width, canvas)
 
 	#button to quit
 	quitButton = Tkinter.Button(root, text ="Close Graphing Calculator", command = root.destroy)

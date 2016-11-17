@@ -8,6 +8,7 @@ HEADER = '\033[95m'
 OKBLUE = '\033[94m'
 WARNING = '\033[93m'
 BOLD = '\033[1m'
+ITALIC = '\033[3m'
 UNDERLINE = '\033[4m'
 
 ENDC = '\033[0m'
@@ -15,15 +16,46 @@ ENDC = '\033[0m'
 #
 #   testResults
 #   Hash table storing the number of successful and failed tests.
-#
 testResults = {
-    'passed':0,
-    'failed':0
+    'passed': 0,
+    'failed': 0
 }
 
+#
+#   printHeader
+#   Prints a header of a unit test.
+#   IN: NONE.
+#   OUT: NONE.
+#
+def printHeader(driver, description):
+    print "#"
+    print "#\t" + BOLD + driver + ENDC
+    print "#\t" + ITALIC + description + ENDC
+    print "#"
+
+#
+#   printSectionHeader
+#   Prints a setion header of a unit test.
+#   IN: NONE.
+#   OUT: NONE.
+#
+def printSectionHeader(section, des=None):
+    print "#"
+    if des:
+        print "#  " + HEADER + UNDERLINE + section + ENDC + " - " + str(des)
+    else:
+        print "#  " + HEADER + UNDERLINE + section + ENDC
+    print "#"
+
+#
+#   printResults
+#   Prints the results of the assertion tests
+#   IN: NONE.
+#   OUT: NONE.
+#
 def printResults():
-    print "Tests Passed: " + GREEN  + str(testResults['passed']) + ENDC
-    print "Tests Failed: " + ERROR  + str(testResults['failed']) + ENDC
+    print "#  Tests Passed: " + GREEN  + str(testResults['passed']) + ENDC
+    print "#  Tests Failed: " + ERROR  + str(testResults['failed']) + ENDC
 
 #
 #   assertTrue
@@ -89,7 +121,7 @@ def assertNotEqual (asrt, stmt, other):
 #
 def printPass(asrt):
     testResults['passed'] += 1
-    print "The assertion: " + asrt + " - test" + GREEN + " Passed" + ENDC
+    print "Assert: " + asrt + " - test" + GREEN + " Passed" + ENDC
 
 #
 #   printFailure
@@ -99,4 +131,4 @@ def printPass(asrt):
 #
 def printFailure(asrt):
     testResults['failed'] += 1
-    print "The assertion: " + asrt + " - test" + ERROR + " Failed" + ENDC
+    print "Assert: " + asrt + " - test" + ERROR + " Failed" + ENDC
