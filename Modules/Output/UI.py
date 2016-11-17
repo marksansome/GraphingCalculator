@@ -5,14 +5,21 @@ from Modules.DataStructures import DocumentDictionary
 
 import tkMessageBox
 
-def generateGraph(root, entry, minRange, maxRange, interval):
+def generateGraph(op, var, root, entry, minRange, maxRange, interval):
 
 	DocumentDictionary.setUpperBound(maxRange)
 	DocumentDictionary.setLowerBound(minRange)
 	DocumentDictionary.setScale(interval)
 	DocumentDictionary.setType(entry)
 	graphing.graph(root)
+	op.append(entry)
+	history = apply(OptionMenu, (root, var) + tuple(op))
+	history.grid(row = 0, column = 7)
 	return
+
+def replaceEntry(entry, value):
+	entry.delete(0,END)
+	entry.insert(0, value)
 
 def AddToEntry(entry, value):
 	entry.insert(entry.index(INSERT), value)
@@ -26,12 +33,18 @@ def UI():
 	root = Tk()
 	BUTTON_WIDTH = 5
 
+	OPTIONS = ["x"]
+
+	variable = StringVar(root)
+	variable.set(OPTIONS[0])
+
 	#lambda: parseString(entry.get())
 	root.title('Name')
 	frame = Frame(root)
 	entryFrame = Frame(root)
 	space = Frame(frame, width = 20, height = 4)
 	entry = Entry(entryFrame, width = 40)
+
 	minLabel = Label(entryFrame, text = "Min")
 	minRange = Entry(entryFrame)
 	minRange.insert(0, "-10")
@@ -39,7 +52,7 @@ def UI():
 	maxRange = Entry(entryFrame)
 	maxRange.insert(0, "10")
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
-	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+	goButton = Button(entryFrame, text = "Go", command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
@@ -48,6 +61,9 @@ def UI():
 	minRange.grid(row = 0, column = 4)
 	maxLabel.grid(row = 0, column = 5)
 	maxRange.grid(row = 0, column = 6)
+
+	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
+	historyButton.grid(row = 0, column = 8)
 	entry.focus_set()
 
 	num = [None]*10
