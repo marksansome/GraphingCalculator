@@ -6,17 +6,28 @@ from Modules.DataStructures import DocumentDictionary
 import tkFont
 import tkMessageBox
 
-def generateGraph(op, var, root, entry, minRange, maxRange, interval):
-
-	DocumentDictionary.setUpperBound(maxRange)
-	DocumentDictionary.setLowerBound(minRange)
-	DocumentDictionary.setScale(interval)
-	DocumentDictionary.setType(entry)
-	#graphing.graph(root)
-	op.append(entry)
-	history = apply(OptionMenu, (root, var) + tuple(op))
-	history.grid(row = 0, column = 7)
+def generateGraph(frame, op, var, root, entry, minRange, maxRange, interval):
+	if checkRanges(minRange, maxRange):
+		DocumentDictionary.setUpperBound(maxRange)
+		DocumentDictionary.setLowerBound(minRange)
+		DocumentDictionary.setScale(interval)
+		DocumentDictionary.setType(entry)
+		#graphing.graph(root)
+		op.append(entry)
+		history = apply(OptionMenu, (frame, var) + tuple(op))
+		history.grid(row = 1, column = 1)
+		errorVar.set("")
 	return
+
+def checkRanges(minRange, maxRange):
+	if minRange > maxRange:
+		showError()
+		return False
+	else:
+		return True
+
+def showError():
+	errorVar.set("ERROR")
 
 def replaceEntry(entry, value):
 	entry.delete(0,END)
@@ -40,29 +51,46 @@ def UI():
 	variable.set(OPTIONS[0])
 
 	boldFont = tkFont.Font(weight = "bold")
-
+	global errorVar
+	errorVar = StringVar()
 	#lambda: parseString(entry.get())
+
+	#Setting up frames and root
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
 	frame = Frame(root, bg = "#f2f2f2")
 	entryFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
-	entry = Entry(entryFrame, width = 40)
 
+	#entry frame
+	entry = Entry(entryFrame, width = 40)
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(entryFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+
+	#minimum ranch
 	minLabel = Label(entryFrame, text = "Min")
 	minLabel = Label(entryFrame, text = "Min", font = boldFont)
 	minRange = Entry(entryFrame)
 	minRange.insert(0, "-10")
+
+	#maximum ranch
 	maxLabel = Label(entryFrame, text = "Max", font = boldFont)
 	maxRange = Entry(entryFrame)
 	maxRange.insert(0, "10")
+
+	#interval / scale
 	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 
-	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
-	historyButton.grid(row = 0, column = 8)
+	#history button
+	historyButton = Button(entryFrame, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
+	historyButton.grid(row = 1, column = 0)
 
-	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+	#settings Button
+	settingsButton = Button(entryFrame, text="Settings", width = BUTTON_WIDTH, command = lambda: configureSettings())
+	settingsButton.grid(row = 1, column = 2)
+	#error
+	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
+
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
@@ -73,6 +101,7 @@ def UI():
 	maxLabel.grid(row = 0, column = 6)
 	maxRange.grid(row = 0, column = 7, padx = 0)
 
+	errorLabel.grid(row = 2, column = 3)
 	entry.focus_set()
 
 	num = [None]*10
@@ -129,7 +158,7 @@ def UI():
 
 
 	#Initialize the frame grid
-	frame.grid(row = 1)
+	frame.grid(row = 2)
 
 	#initialize each button in the frame in their respective rows and columns
 	space.grid(row = 0 , column = 4)
