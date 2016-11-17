@@ -39,8 +39,6 @@ def iteratesDomain(tree):
 	}
 
 	#Writing the table of values inside the global dictionary
-
-	#print tableOfValues
 	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
 
@@ -53,4 +51,8 @@ def go():
 	#If not we just expect a single number as an answer
 	else:
 		result = TreeProcessing.processLoop(docTree)
+<<<<<<< HEAD
 		DocumentDictionary.setAnswer(result)
+=======
+		DocumentDictionary.setAnswer(result)
+>>>>>>> development
