@@ -91,9 +91,8 @@ def UI():
 	operator[22] = Button(frame, text='e^x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"e^()"))
 	operator[23] = Button(frame, text='pi', width = BUTTON_WIDTH, command = lambda: AddToEntry(entry,"3.14"))
 	operator[24] = Button(frame, text='!', width = BUTTON_WIDTH, command = lambda: AddToEntry(entry,"!"))
-	operator[25] = Button(frame, text='(y)Sqrt(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"()sqrt()"))
-	operator[26] = Button(frame, text='logy(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"log()()"))
-	operator[27] = Button(frame, text='en(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"en()"))
+	operator[25] = Button(frame, text='log(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"log()"))
+	operator[26] = Button(frame, text='ln(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"ln()"))
 
 	#Initialize the frame grid
 	frame.grid(row = 1)
@@ -137,7 +136,6 @@ def UI():
 	operator[24].grid(row = 2,column = 9)
 	operator[25].grid(row = 3,column = 9)
 	operator[26].grid(row = 0,column = 10)
-	operator[27].grid(row = 1,column = 10)
 	root.wm_title("Ranch Calc 2.0")
 
 	root.mainloop()
