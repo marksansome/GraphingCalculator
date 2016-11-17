@@ -69,9 +69,9 @@ def UI():
 	intervalLabel.grid(row = 0, column = 2)
 	interval.grid(row = 0, column = 3, padx = 0)
 	minLabel.grid(row = 0, column = 4)
-	minRange.grid(row = 0, column = 5)
+	minRange.grid(row = 0, column = 5, padx = 0)
 	maxLabel.grid(row = 0, column = 6)
-	maxRange.grid(row = 0, column = 7)
+	maxRange.grid(row = 0, column = 7, padx = 0)
 
 	entry.focus_set()
 
