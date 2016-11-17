@@ -51,4 +51,8 @@ def go():
 	#If not we just expect a single number as an answer
 	else:
 		result = TreeProcessing.processLoop(docTree)
+<<<<<<< HEAD
 		DocumentDictionary.setAnswer(result)
+=======
+		DocumentDictionary.setAnswer(result)
+>>>>>>> development
