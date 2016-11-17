@@ -21,8 +21,10 @@ def process(tree, nodeIndex):
 		result = calculate(parent, left, right)
 		tree[nodeIndex] = result
 		Tree.removeChilds(tree, nodeIndex)
+
 	except ValueError:
 		print ("Value Error")
+
 #calculate parent value given two operands child nodes
 def calculate(parent, left, right):
 	result = operators[parent](left, right)

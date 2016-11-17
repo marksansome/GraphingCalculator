@@ -12,12 +12,12 @@ def replaceVariables(variable, value, table):
 	return result
 
 #Iterates and create a table from the low boundary to the up boundary, given the variable as a string ("x" or "y" or ..)
-def iteratesDomain(variable):
+def iteratesDomain(tree):
 	#Initialise and recovers data from the dictionnary
 	domainLowBound = float(DocumentDictionary.getLowerBound())
 	domainUpBound = float(DocumentDictionary.getUpperBound())
 	interval = float(DocumentDictionary.getScale())
-	table = DocumentDictionary.getTree()
+	table = tree
 
 	#Initiating the future loop
 	preimage = []
@@ -28,7 +28,7 @@ def iteratesDomain(variable):
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
 		preimage.append(j)
 		#Creates a temporary copy of the table representation of the tree so we keep untouched the "main" tree with variables
-		temp = replaceVariables(variable, j, table)
+		temp = replaceVariables("x", j, table)
 		image.append(TreeProcessing.processLoop(temp))
 		j += interval
 		i += 1
@@ -41,3 +41,14 @@ def iteratesDomain(variable):
 	#Writing the table of values inside the global dictionary
 	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
+
+#GOOOOOOO LET'S RANCH IT UP, triggers the calculation process
+def go():
+	docTree = DocumentDictionary.getTree()
+	#If we have a variable in the tree, it means we have to iterate on a domain
+	if "x" in docTree:
+		iteratesDomain(docTree)
+	#If not we just expect a single number as an answer
+	else:
+		result = TreeProcessing.processLoop(docTree)
+		DocumentDictionary.setAnswer(result)
