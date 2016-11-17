@@ -20,8 +20,8 @@ preParse = parseStringToList(eq)
 ansVerified = verify(preParse)
 assertEqual("The equation " + eq + " is equal to " + ans + " [compared to " + ansVerified + "]",ansVerified,ans)
 
-eq = "5+6*7-9/1"
-ans = "((5+(6*7))-(9/1))"
+eq = "5.25+6*7-9/1"
+ans = "((5.25+(6*7))-(9/1))"
 preParse = parseStringToList(eq)
 ansVerified = verify(preParse)
 assertEqual("The equation " + eq + " is equal to " + ans + " [compared to " + ansVerified + "]",ansVerified,ans)

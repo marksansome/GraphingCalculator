@@ -21,13 +21,14 @@ def process(tree, nodeIndex):
 		result = calculate(parent, left, right)
 		tree[nodeIndex] = result
 		Tree.removeChilds(tree, nodeIndex)
+
 	except ValueError:
-		print "Value Error"
+		print ("Value Error")
+
 #calculate parent value given two operands child nodes
 def calculate(parent, left, right):
 	result = operators[parent](left, right)
 	return result
-
 
 # define the different function blocks
 def addition(left, right):
@@ -39,117 +40,62 @@ def multiplication(left, right):
 def substraction(left, right):
 	return left - right
 
-def division(left, right):
-	#TODO:manage types to get floats as a result
-	return left / right
+def div(left, right):
+	#TODO: division by zero
+	try:
+		result = left/right
+		return result
+	except ZeroDivisionError:
+		return None
 
 def sinus(left, right):
-	#Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.sin(left)
-	elif left == None:
-		return math.sin(right)
+	return math.sin(left)
 
 def cosinus(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.cos(left)
-	elif left == None:
-		return math.cos(right)
+	return math.cos(left)
 
 def tangente(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
 	#TODO: domain range
-	if right == None:
-		return math.tan(left)
-	elif left == None:
-		return math.tan(right)
+	return math.tan(left)
 
 def arcsinus(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.sin(left)
-	elif left == None:
-		return math.sin(right)
+	return math.sin(left)
 
 def arccosinus(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.acos(left)
-	elif left == None:
-		return math.acos(right)
+	return math.acos(left)
 
 def arctangente(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.atan(left)
-	elif left == None:
-		return math.atan(right)
+	return math.atan(left)
 
 def sinhyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.sinh(left)
-	elif left == None:
-		return math.sinh(right)
+	return math.sinh(left)
 
 def coshyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.cosh(left)
-	elif left == None:
-		return math.cosh(right)
+	return math.cosh(left)
 
 def tanhyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.tanh(left)
-	elif left == None:
-		return math.tanh(right)
+	return math.tanh(left)
 
 def arcsinhyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.asinh(left)
-	elif left == None:
-		return math.asinh(right)
+	return math.asinh(left)
 
 def arccoshyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.acosh(left)
-	elif left == None:
-		return math.acosh(right)
+	return math.acosh(left)
 
 def arctanhyp(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.atanh(left)
-	elif left == None:
-		return math.atanh(right)
+	return math.atanh(left)
 
 def squareroot(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		return math.sqrt(left)
-	elif left == None:
-		return math.sqrt(right)
+	return math.sqrt(left)
 
 def power(left, right):
-	#TODO:confirm this
 	return math.pow(left, right)
 
 def log(left, right):
-	#TODO:confirm this too
-	return math.log(right, left)
+	return math.log10(left)
 
 def ln(left, right):
-	# Handling both case left or right just in case, it's a "security" layer
-	if right == None:
-		#TODO: base e right?
-		return math.log(left, math.e)
-	elif left == None:
-		return math.log(right, math.e)
+	return math.log(left)
 
 def exp(left, right):
 	# Handling both case left or right just in case, it's a "security" layer
@@ -164,7 +110,7 @@ operators = {
 	"+" : addition,
 	"*" : multiplication,
 	"-" : substraction,
-	"/" : division,
+	"/" : div,
 	"sin": sinus,
 	"cos": cosinus,
 	"tan:": tangente,
