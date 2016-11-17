@@ -1,6 +1,5 @@
-__all__ = ['DataStructures', 'Input', 'Maths', 'Output', 'Testing']
+__all__ = ['DataStructures', 'Input', 'Maths', 'Output']
 import DataStructures
 import Input
 import Maths
 import Output
-import Testing

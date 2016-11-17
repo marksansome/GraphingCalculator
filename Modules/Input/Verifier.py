@@ -47,7 +47,6 @@ def parseStringToList(string):
     sIndex = 0
     #   Begin iterating the string
     while index < length:
-        #print parse
         #   Ensure we are not looking at a space
         if string[index] is not ' ':
             #   If it's the last item make sure we add it
@@ -62,7 +61,9 @@ def parseStringToList(string):
             elif string[index] is 'x':
                 #   If there was a term before x we need to multipy and bracket it to preserve order
                 if parseString is not "":
-                    parse.append("(" + parseString + "*" + "x)")
+                    parse.append(parseString)
+                    parse.append("*")
+                    parse.append("x")
                     parseString = ""
                 #   Otherwise we just want to append an x
                 else:
@@ -110,28 +111,38 @@ def setNestedBrackets(parse):
                     someList = setNestedBrackets(parse[sIndex+1:k])
                 #   Otherwise we're done and we need to parenthesize the list, call verify
                 myStr = verify(parse[sIndex+1:k])
+                #   Merc the items we've condensed
                 for i in range(0, k-sIndex+1):
-                    parse.pop(sIndex),
+                    parse.pop(sIndex)
                 #   Combine them into one element
-                parse.insert(sIndex,myStr)
+                if len(myStr) is 1:
+                    parse.insert(sIndex,"(" + myStr + ")")
+                else:
+                    parse.insert(sIndex,myStr)
                 return parse
         k += 1
 
 #
 #   verify
 #   Parse and validate into parenthesized string.
-#   IN: (String) the equation to parse.
+#   IN: (List) the pre parsed list. (See parseStringToList)
 #   OUT: (String) The validated expression.
 #
 def verify(parse):
     parseLength = len(parse)
     openBracket = 0
     sIndex = 0
+    counter = 0
 
+    #   We need to count the brackets and run setNestedBrackets for each
+    for a in parse:
+        if a == '(':
+            counter+=1
+    for m in range(0,counter):
+        setNestedBrackets(parse)
     #   For each BEDMAS operation
     for i in range(4,0,-1):
         k = 0
-        setNestedBrackets(parse)
         #   For each element of the parse'd list
         while k < parseLength:
             #   Check to see if the current index of the list is an operator
@@ -149,11 +160,10 @@ def verify(parse):
             elif parse[k] in MathFunctions.keys():
                 myStr = "(" + parse[k] + parse[k+1] + ")"
                 #   Remove the three items from the list
-                print "rm in ver " + str(parse.pop(k))
-                print "rm in ver " + str(parse.pop(k))
+                parse.pop(k)
+                parse.pop(k)
                 #   Combine them into one element
                 parse.insert(k,myStr)
-                print parse
                 #   Reset the parse index counter, and look again for same order operations
                 k = 0
             #   Recalculate the length of the list and increment the counter
