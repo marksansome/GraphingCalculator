@@ -9,8 +9,7 @@ import tkFont
 import tkMessageBox
 
 
-def generateGraph(op, var, root, entry, minRange, maxRange, interval):
-	if checkRanges(minRange, maxRange): 
+
 
 def saveSettings(mode):
 	fpt = open('settings.txt', 'w')
@@ -53,13 +52,9 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setType(entry)
 		#graphing.graph(root)
 		op.append(entry)
-		history = apply(OptionMenu, (root, var) + tuple(op))
-		history.grid(row = 0, column = 7)
-
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")
 		history.grid(row = 0, column = 0)
-
 		errorVar.set("")
 	return
 
@@ -121,11 +116,6 @@ def UI():
 	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 
-	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
-	historyButton.grid(row = 0, column = 8)
-
-	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
-
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
 	#minimum ranch
@@ -168,10 +158,6 @@ def UI():
 	minLabel.grid(row = 0, column = 4)
 	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
-
-	maxRange.grid(row = 0, column = 7)
-	errorLabel.grid(row = 1, column = 3)
-
 	maxRange.grid(row = 0, column = 7, padx = 0)
 
 	errorLabel.grid(row = 0, column = 4)
@@ -232,7 +218,7 @@ def UI():
 
 
 	#Initialize the frame grid
-	frame.grid(row = 1)
+	frame.grid(row = 2)
 
 	#initialize each button in the frame in their respective rows and columns
 	space.grid(row = 0 , column = 4)
