@@ -2,19 +2,26 @@
 
 from Modules.Input.Verifier import parseStringToList
 from Modules.DataStructures.MathFunctions import *
+from Modules.Output.UI import showError
 
+#
+#   validate
+#   Takes a string and checks if it has any invalid mathematical syntax.
+#   IN: (String) The expression validate.
+#
 def validate(equation):
     eqList = parseStringToList(equation)
     error = None
     print eqList
     parentheses = 0
+
     for i,item in enumerate(eqList):
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
         elif item is ')':
             parentheses += -1
-        elif not item.isdigit() and item != 'x' and not isConstant(item):
+        elif not item.isdigit() and item != 'x' and not isOperator(item) and not isConstant(item):
             if item not in MathFunctions:
                 error = "Invalid function in equation"
         elif isOperator(item):
@@ -24,7 +31,7 @@ def validate(equation):
     if parentheses != 0:
         error = "Parentheses mismatch"
     if error:
-        print error
+        showError(error)
     else:
         print "okay"
 

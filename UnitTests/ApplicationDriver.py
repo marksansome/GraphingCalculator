@@ -24,17 +24,12 @@ if getAll or "Input" in sys.argv:
 
 if getAll or "FillTree" in sys.argv:
     from UnitTests.Maths.FillTreeDriver import *
-'''
-if getAll or "Assets" in sys.argv:
-    from UnitTests.Maths.TestAssets import *
-
-if getAll or "Calculation" in sys.argv:
-    from UnitTests.Maths.TestCalculation import *
 
 if getAll or "TreeProcessing" in sys.argv:
-    from UnitTests.Maths.TestTreeProcessing import *
-'''
+    from UnitTests.Maths.TreeProcessingDriver import *
 
-
-printSectionHeader("Overall Results:")
-printResults()
+if "Help" in sys.argv:
+    print ""
+else:
+    printSectionHeader("Overall Results:")
+    printResults()
