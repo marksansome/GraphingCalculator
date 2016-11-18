@@ -12,11 +12,9 @@ def validate(equation):
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
-            if nextI is ')':
-                error = "Empty parentheses set"
         elif item is ')':
             parentheses += -1
-        elif item.isalpha() and item != 'x':
+        elif not item.isdigit() and item != 'x' and not isConstant(item):
             if item not in MathFunctions:
                 error = "Invalid function in equation"
         elif isOperator(item):
@@ -34,3 +32,8 @@ def isOperator(c):
 	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
 		return 1
 	return 0
+
+def isConstant(c):
+    if c == 'pi' or c == 'e':
+        return 1
+    return 0

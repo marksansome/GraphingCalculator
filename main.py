@@ -2,9 +2,10 @@
 from Modules.Output import UI
 from Modules.Maths import Assets
 from Modules.DataStructures import DocumentDictionary
+from Modules.Input.Validator import validate
 #TODO:remove that shit
 #Testing replacements with a temporary table for RANCHING FUSION
-table = []
+'''table = []
 for i in range(20):
 	table.append("*")
 
@@ -14,3 +15,6 @@ table[0] = None
 
 DocumentDictionary.setTree(table)
 Assets.iteratesDomain("x")
+'''
+validate("5++6")
+#UI()
