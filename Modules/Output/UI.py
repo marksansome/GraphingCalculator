@@ -50,15 +50,15 @@ def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, ma
 		DocumentDictionary.setType(entry)
 		errorCode = goRunAll(entry)
 		if errorCode is 0:
-			#if DocumentDictionary.getAnswer is None:
-			graph(graphCanvas)
-			op.append(entry)
-			history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
-			history.configure(highlightbackground = "#000000")
-			history.grid(row = 0, column = 0)
-			errorVar.set("")
-			#else:
-			answer.set("ANSWER: " + str(DocumentDictionary.getAnswer()))
+			if DocumentDictionary.getAnswer() is None:
+				graph(graphCanvas)
+				op.append(entry)
+				history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
+				history.configure(highlightbackground = "#000000")
+				history.grid(row = 0, column = 0)
+				errorVar.set("")
+			else:
+				answer.set("ANSWER: " + str(DocumentDictionary.getAnswer()))
 		else:
 			showError(getErrorMsg(errorCode))
 	return
@@ -117,6 +117,7 @@ def UI():
 	settingsFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
 	entry = Entry(entryFrame, width = 40)
+	answerFrame = Frame(root, bg = "#f2f2f2")
 
 	minLabel = Label(entryFrame, text = "Min")
 	minLabel = Label(entryFrame, text = "Min", font = boldFont)
@@ -166,7 +167,7 @@ def UI():
 	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
 
 	#answer
-	answerLabel = Label(frame, textvariable = answer, font = boldFont, bg = "#f2f2f2")
+	answerLabel = Label(answerFrame, textvariable = answer, font = boldFont, bg = "#f2f2f2")
 
 	#graph
 	graphCanvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
@@ -184,7 +185,8 @@ def UI():
 	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
 	maxRange.grid(row = 0, column = 7, padx = 0)
-	answerLabel.grid(row = 4, column =7)
+	answerFrame.grid(row= 3,column = 0)
+	answerLabel.grid(row = 0, column =0)
 	errorLabel.grid(row = 0, column = 5)
 
 	entry.focus_set()

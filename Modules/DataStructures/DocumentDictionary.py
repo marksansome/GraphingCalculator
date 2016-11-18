@@ -6,7 +6,7 @@
 dictionary = {
     'name' : "",
     'type' : "",
-    'answer' : "",
+    'answer' : None,
     'radian': False,
     'scale' : 0.1,
     'lowerBound' : -10,
