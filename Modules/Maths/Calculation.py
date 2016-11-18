@@ -24,6 +24,7 @@ def process(tree, nodeIndex):
 
 	except ValueError:
 		print ("Value Error")
+		#TODO:error okay
 
 #calculate parent value given two operands child nodes
 def calculate(parent, left, right):
@@ -57,73 +58,73 @@ def sinus(left, right):
 	if DocumentDictionary.isRad():
 		return math.sin(left)
 	else:
-		return math.sin(math.degrees(left))
+		return math.sin(math.radians(left))
 
 def cosinus(left, right):
 	if DocumentDictionary.isRad():
 		return math.cos(left)
 	else:
-		return math.cos(math.degrees(left))
+		return math.cos(math.radians(left))
 
 def tangente(left, right):
 	if DocumentDictionary.isRad():
 		return math.tan(left)
 	else:
-		return math.tan(math.degrees(left))
+		return math.tan(math.radians(left))
 
 def arcsinus(left, right):
 	if DocumentDictionary.isRad():
 		return math.asin(left)
 	else:
-		return math.asin(math.degrees(left))
+		return math.asin(math.radians(left))
 
 def arccosinus(left, right):
 	if DocumentDictionary.isRad():
 		return math.acos(left)
 	else:
-		return math.acos(math.degrees(left))
+		return math.acos(math.radians(left))
 
 def arctangente(left, right):
 	if DocumentDictionary.isRad():
 		return math.atan(left)
 	else:
-		return math.atan(math.degrees(left))
+		return math.atan(math.radians(left))
 
 def sinhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.sinh(left)
 	else:
-		return math.sinh(math.degrees(left))
+		return math.sinh(math.radians(left))
 
 def coshyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.cosh(left)
 	else:
-		return math.cosh(math.degrees(left))
+		return math.cosh(math.radians(left))
 
 def tanhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.tanh(left)
 	else:
-		return math.tanh(math.degrees(left))
+		return math.tanh(math.radians(left))
 
 def arcsinhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.asinh(left)
 	else:
-		return math.asinh(math.degrees(left))
+		return math.asinh(math.radians(left))
 
 def arccoshyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.acosh(left)
 	else:
-		return math.acosh(math.degrees(left))
+		return math.acosh(math.radians(left))
 
 def arctanhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.atanh(left)
 	else:
-		return math.atanh(math.degrees(left))
+		return math.atanh(math.radians(left))
 
 def squareroot(left, right):
 	return math.sqrt(left)
