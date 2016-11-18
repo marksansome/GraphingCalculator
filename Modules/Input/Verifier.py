@@ -170,3 +170,14 @@ def verify(parse):
             parseLength = len(parse)
             k+=1
     return parse.pop(0)
+
+'''
+function will do all the hard work
+'''
+def ranchMeUpDaddy(string):
+    hello = "string to make interpreter happy"
+    #someList = validatorFunction(string)
+    #parenthesizedString = verify(someList)
+    #goFill(parenthesizedString)
+    #go()
+
