@@ -2,20 +2,59 @@
 from Tkinter import *
 from Modules.Output import graphing
 from Modules.DataStructures import DocumentDictionary
+from Modules.Input.Verifier import *
+from Modules.Maths.FillTree import *
 
 import tkFont
 import tkMessageBox
 
-def generateGraph(op, var, root, entry, minRange, maxRange, interval):
-	if checkRanges(minRange, maxRange): 
+
+
+
+def saveSettings(mode):
+	fpt = open('settings.txt', 'w')
+	fpt.write("mode=" + mode + "\n")
+	fpt.close()
+
+def configureSettings():
+	SETTINGS = []
+	fpt = open('settings.txt', 'r')
+	dataFile = fpt.read()
+	SETTINGS = dataFile.split('\n')
+	fpt.close()
+	window = Tk()
+	window.title("Settings")
+	window.configure(background = "#f2f2f2")
+	frame = Frame(window, bg="#f2f2f2", height=400, width=300)
+	frame.pack()
+	#save/exit  button
+	saveButton = Button(frame, text = "Save", command = lambda: saveSettings(angleVar.get()))
+	saveButton.grid(row = 0, column = 0)
+	exitButton = Button(frame, text = "Exit", command = window.destroy)
+	exitButton.grid(row = 0, column = 1)
+	#angle settings
+	MODES = ["radians", "degrees", "gradians"]
+	angleVar = StringVar(frame)
+	angleVar.set(MODES[0])
+	angleLabel = Label(frame, text="Mode",width=6)
+	angleLabel.grid(row = 1, column = 0)
+	angle = apply(OptionMenu, (frame, angleVar) + tuple(MODES))
+	angle.grid(row = 1, column = 1)
+
+	window.mainloop()
+
+def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, interval):
+	boldFont = tkFont.Font(weight = "bold")
+	if checkRanges(minRange, maxRange):
 		DocumentDictionary.setUpperBound(maxRange)
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
 		#graphing.graph(root)
 		op.append(entry)
-		history = apply(OptionMenu, (root, var) + tuple(op))
-		history.grid(row = 0, column = 7)
+		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
+		history.configure(highlightbackground = "#000000")
+		history.grid(row = 0, column = 0)
 		errorVar.set("")
 	return
 
@@ -26,8 +65,8 @@ def checkRanges(minRange, maxRange):
 	else:
 		return True
 
-def showError():
-	errorVar.set("ERROR")
+def showError(string):
+	errorVar.set("ERROR: " + string)
 
 def replaceEntry(entry, value):
 	entry.delete(0,END)
@@ -53,11 +92,17 @@ def UI():
 	boldFont = tkFont.Font(weight = "bold")
 	global errorVar
 	errorVar = StringVar()
+
 	#lambda: parseString(entry.get())
+
+
+	#Setting up frames and root
+
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
 	frame = Frame(root, bg = "#f2f2f2")
 	entryFrame = Frame(root, bg = "#f2f2f2")
+	settingsFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
 	entry = Entry(entryFrame, width = 40)
 
@@ -71,13 +116,41 @@ def UI():
 	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 
-	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
-	historyButton.grid(row = 0, column = 8)
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
-	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
+	#minimum ranch
+	minLabel = Label(entryFrame, text = "Min", font = boldFont, bg = "#f2f2f2")
+	minRange = Entry(entryFrame)
+	minRange.insert(0, "-10")
+
+	#maximum ranch
+	maxLabel = Label(entryFrame, text = "Max", font = boldFont, bg = "#f2f2f2")
+	maxRange = Entry(entryFrame)
+	maxRange.insert(0, "10")
+
+	#interval / scale
+	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont, bg = "#f2f2f2")
+	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
+
+	#history button
+	historyButton = Button(settingsFrame, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()),bg = "#d6d6c2", font = boldFont)
+	historyButton.grid(row = 0, column = 1)
+	historyButton.configure(highlightbackground = "#000000")
+
+	#settings Button
+	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH, command = lambda: configureSettings(),bg = "#d6d6c2", font = boldFont)
+	settingsButton.configure(highlightbackground = "#000000")
+	settingsButton.grid(row = 0, column = 2)
+	exitButton = Button(settingsFrame, text = "Exit Program", command = root.destroy,bg = "#d6d6c2", font = boldFont)
+	exitButton.configure(highlightbackground = "#000000")
+	exitButton.grid(row = 0, column = 3)
+	#error
+	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
+
 
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
+	settingsFrame.grid(row = 1, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
 	intervalLabel.grid(row = 0, column = 2)
@@ -85,8 +158,10 @@ def UI():
 	minLabel.grid(row = 0, column = 4)
 	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
-	maxRange.grid(row = 0, column = 7)
-	errorLabel.grid(row = 1, column = 3)
+	maxRange.grid(row = 0, column = 7, padx = 0)
+
+	errorLabel.grid(row = 0, column = 4)
+
 	entry.focus_set()
 
 	num = [None]*10
@@ -143,7 +218,7 @@ def UI():
 
 
 	#Initialize the frame grid
-	frame.grid(row = 1)
+	frame.grid(row = 2)
 
 	#initialize each button in the frame in their respective rows and columns
 	space.grid(row = 0 , column = 4)

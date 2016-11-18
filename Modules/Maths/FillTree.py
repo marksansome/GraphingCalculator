@@ -65,17 +65,3 @@ def goFill(eq):
 	initList()
 	parseString(eq)
 	setTree(myList)
-#equation = "(sin(cos(0)))"
-#equation = "((5+6)*(9+8))"
-#equation = "((2+2)*(sin(4.0+5.0)))"
-#equation = "(log(5+5))"
-#equation = "(arcsinh(cos(pi)))"
-#equation = '(tanh(arctanh(cos(pi))))'
-#equation = "((2*x)+5)"
-#equation = "((5!^2)+(sin(8+2)))"
-#equation = "(((1.2+((x*2)/9))+8)+(tan((2*x)^2)))"
-#equation = "(4+6)!"
-#parseString(equation,1)
-#print myList
-#parseString(equation,1)
-#print myList

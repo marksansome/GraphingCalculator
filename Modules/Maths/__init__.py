@@ -1,4 +1,3 @@
-__all__ = ['Assets', 'Calculation', 'TreeProcessing']
-from Assets import *
+__all__ = ['Calculation', 'TreeProcessing']
 from Calculation import *
 from TreeProcessing import *
