@@ -1,8 +1,6 @@
-#File responsible for handling all the recursive parsing of the tree
 from Modules.DataStructures.DocumentDictionary import *
 from Modules.DataStructures.Tree import *
 from Modules.Maths.Calculation import *
-#from Modules.Maths.Assets import *
 
 tree = []
 
@@ -27,8 +25,6 @@ def processLoop(main):
 	while not isOperand(tree[1]):
 		postOrderProcess(tree, 1)
 	return tree[1]
-
-
 
 def replaceVariables(variable, value, table):
 	result = list(table)
