@@ -6,49 +6,16 @@ from Modules.DataStructures import DocumentDictionary
 import tkFont
 import tkMessageBox
 
-def saveSettings(mode):
-	fpt = open('settings.txt', 'w')
-	fpt.write("mode=" + mode + "\n")
-	fpt.close()
-
-def configureSettings():
-	SETTINGS = []
-	fpt = open('settings.txt', 'r')
-	dataFile = fpt.read()
-	SETTINGS = dataFile.split('\n')
-	fpt.close()
-	window = Tk()
-	window.title("Settings")
-	window.configure(background = "#f2f2f2")
-	frame = Frame(window, bg="#f2f2f2", height=400, width=300)
-	frame.pack()
-
-	#save/exit  button
-	saveButton = Button(frame, text = "Save", command = lambda: saveSettings(angleVar.get()))
-	saveButton.grid(row = 0, column = 0)
-	exitButton = Button(frame, text = "Exit", command = window.destroy)
-	exitButton.grid(row = 0, column = 1)
-	#angle settings
-	MODES = ["radians", "degrees", "gradians"]
-	angleVar = StringVar(frame)
-	angleVar.set(MODES[0])
-	angleLabel = Label(frame, text="Mode",width=6)
-	angleLabel.grid(row = 1, column = 0)
-	angle = apply(OptionMenu, (frame, angleVar) + tuple(MODES))
-	angle.grid(row = 1, column = 1)
-
-	window.mainloop()
-
-def generateGraph(frame, op, var, root, entry, minRange, maxRange, interval):
-	if checkRanges(minRange, maxRange):
+def generateGraph(op, var, root, entry, minRange, maxRange, interval):
+	if checkRanges(minRange, maxRange): 
 		DocumentDictionary.setUpperBound(maxRange)
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
 		#graphing.graph(root)
 		op.append(entry)
-		history = apply(OptionMenu, (frame, var) + tuple(op))
-		history.grid(row = 1, column = 1)
+		history = apply(OptionMenu, (root, var) + tuple(op))
+		history.grid(row = 0, column = 7)
 		errorVar.set("")
 	return
 
@@ -87,56 +54,39 @@ def UI():
 	global errorVar
 	errorVar = StringVar()
 	#lambda: parseString(entry.get())
-
-	#Setting up frames and root
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
 	frame = Frame(root, bg = "#f2f2f2")
 	entryFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
-
-	#entry frame
 	entry = Entry(entryFrame, width = 40)
-	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(entryFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
-	#minimum ranch
 	minLabel = Label(entryFrame, text = "Min")
 	minLabel = Label(entryFrame, text = "Min", font = boldFont)
 	minRange = Entry(entryFrame)
 	minRange.insert(0, "-10")
-
-	#maximum ranch
 	maxLabel = Label(entryFrame, text = "Max", font = boldFont)
 	maxRange = Entry(entryFrame)
 	maxRange.insert(0, "10")
-
-	#interval / scale
 	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 
-	#history button
-	historyButton = Button(entryFrame, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
-	historyButton.grid(row = 1, column = 0)
+	historyButton = Button(root, text="History", width = BUTTON_WIDTH, command = lambda: replaceEntry(entry, variable.get()))
+	historyButton.grid(row = 0, column = 8)
 
-	#settings Button
-	settingsButton = Button(entryFrame, text="Settings", width = BUTTON_WIDTH, command = lambda: configureSettings())
-	settingsButton.grid(row = 1, column = 2)
-	exitButton = Button(entryFrame, text = "Exit Program", command = root.destroy)
-	exitButton.grid(row = 1, column = 3)
-	#error
 	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
 
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
 	goButton.grid(row = 0, column = 0, padx = 0)
 	intervalLabel.grid(row = 0, column = 2)
 	interval.grid(row = 0, column = 3, padx = 0)
 	minLabel.grid(row = 0, column = 4)
-	minRange.grid(row = 0, column = 5, padx = 0)
+	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
-	maxRange.grid(row = 0, column = 7, padx = 0)
-
-	errorLabel.grid(row = 2, column = 3)
+	maxRange.grid(row = 0, column = 7)
+	errorLabel.grid(row = 1, column = 3)
 	entry.focus_set()
 
 	num = [None]*10
@@ -193,7 +143,7 @@ def UI():
 
 
 	#Initialize the frame grid
-	frame.grid(row = 2)
+	frame.grid(row = 1)
 
 	#initialize each button in the frame in their respective rows and columns
 	space.grid(row = 0 , column = 4)
