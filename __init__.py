@@ -11,7 +11,6 @@ GraphingCalculator/
 			__init__.py
 		Maths
 			__init__.py
-			Assets.py
 			Calculation.py
 			TreeProcessing.py
 		Output

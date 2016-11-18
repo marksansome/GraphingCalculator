@@ -1,24 +1,14 @@
 #!/usr/bin/python
-from Modules.Output import UI
-from Modules.Maths import Assets
-from Modules.DataStructures import DocumentDictionary
+import sys
+from Modules.Output.UI import *
+from Modules.DataStructures.DocumentDictionary import *
+from Modules.Input.Validator import validate
 
-#TODO:remove that shit
-#Testing replacements with a temporary table for RANCHING FUSION
-'''
-table = []
-for i in range(20):
-	table.append("*")
-
-for i in range(31, 100):
-	table.append("x")
-table[0] = None
-
-
-#DocumentDictionary.setTree(DocumentDictionary.dictionary, table)
-Assets.iteratesDomain("x",table)
-'''
-
-UI()
-
-
+if len(sys.argv) == 2:
+    with open(sys.argv[1],'r') as myFile:
+        for line in myFile:
+            status = goRunAll(line.rstrip())
+            if not status:
+                print line.rstrip() + " = " + str(getAnswer())
+else:
+    UI()

@@ -8,6 +8,9 @@ from Modules.Maths.FillTree import *
 import tkFont
 import tkMessageBox
 
+
+
+
 def saveSettings(mode):
 	fpt = open('settings.txt', 'w')
 	fpt.write("mode=" + mode + "\n")
@@ -90,16 +93,29 @@ def UI():
 	global errorVar
 	errorVar = StringVar()
 
+	#lambda: parseString(entry.get())
+
+
 	#Setting up frames and root
+
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
 	frame = Frame(root, bg = "#f2f2f2")
 	entryFrame = Frame(root, bg = "#f2f2f2")
 	settingsFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
-
-	#entry frame
 	entry = Entry(entryFrame, width = 40)
+
+	minLabel = Label(entryFrame, text = "Min")
+	minLabel = Label(entryFrame, text = "Min", font = boldFont)
+	minRange = Entry(entryFrame)
+	minRange.insert(0, "-10")
+	maxLabel = Label(entryFrame, text = "Max", font = boldFont)
+	maxRange = Entry(entryFrame)
+	maxRange.insert(0, "10")
+	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
+	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
+
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
 	#minimum ranch
@@ -131,6 +147,8 @@ def UI():
 	#error
 	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
 
+
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	settingsFrame.grid(row = 1, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
@@ -138,11 +156,12 @@ def UI():
 	intervalLabel.grid(row = 0, column = 2)
 	interval.grid(row = 0, column = 3, padx = 0)
 	minLabel.grid(row = 0, column = 4)
-	minRange.grid(row = 0, column = 5, padx = 0)
+	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
 	maxRange.grid(row = 0, column = 7, padx = 0)
 
 	errorLabel.grid(row = 0, column = 4)
+
 	entry.focus_set()
 
 	num = [None]*10
