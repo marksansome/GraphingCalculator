@@ -2,7 +2,6 @@
 from Modules.Output import UI
 from Modules.Maths import Assets
 from Modules.DataStructures import DocumentDictionary
-
 #TODO:remove that shit
 #Testing replacements with a temporary table for RANCHING FUSION
 table = []
