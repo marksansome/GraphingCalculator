@@ -1,7 +1,6 @@
 #File responsible for managing calculations at the finest (i.e bottom of the tree)
 from __future__ import division
 from Modules.DataStructures import Tree
-from Modules.DataStructures import DocumentDictionary
 import math
 
 #process one node that is parent of operands nodes
@@ -18,6 +17,7 @@ def process(tree, nodeIndex):
 			right = None
 
 		parent = tree[nodeIndex]
+		#TODO:this is where i want to add the domain out of bound error
 		result = calculate(parent, left, right)
 		tree[nodeIndex] = result
 		Tree.removeChilds(tree, nodeIndex)
@@ -27,13 +27,8 @@ def process(tree, nodeIndex):
 
 #calculate parent value given two operands child nodes
 def calculate(parent, left, right):
-	#TODO: test that shit
-	try:
-		result = operators[parent](left, right)
-		return result
-	except ValueError:
-		return None
-		#TODO:link domain eror
+	result = operators[parent](left, right)
+	return result
 
 # define the different function blocks
 def addition(left, right):
@@ -46,7 +41,7 @@ def substraction(left, right):
 	return left - right
 
 def div(left, right):
-	#TODO: division by zero to be tested
+	#TODO: division by zero
 	try:
 		result = left/right
 		return result
@@ -54,76 +49,41 @@ def div(left, right):
 		return None
 
 def sinus(left, right):
-	if DocumentDictionary.isRad():
-		return math.sin(left)
-	else:
-		return math.sin(math.degrees(left))
+	return math.sin(left)
 
 def cosinus(left, right):
-	if DocumentDictionary.isRad():
-		return math.cos(left)
-	else:
-		return math.cos(math.degrees(left))
+	return math.cos(left)
 
 def tangente(left, right):
-	if DocumentDictionary.isRad():
-		return math.tan(left)
-	else:
-		return math.tan(math.degrees(left))
+	#TODO: domain range
+	return math.tan(left)
 
 def arcsinus(left, right):
-	if DocumentDictionary.isRad():
-		return math.asin(left)
-	else:
-		return math.asin(math.degrees(left))
+	return math.sin(left)
 
 def arccosinus(left, right):
-	if DocumentDictionary.isRad():
-		return math.acos(left)
-	else:
-		return math.acos(math.degrees(left))
+	return math.acos(left)
 
 def arctangente(left, right):
-	if DocumentDictionary.isRad():
-		return math.atan(left)
-	else:
-		return math.atan(math.degrees(left))
+	return math.atan(left)
 
 def sinhyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.sinh(left)
-	else:
-		return math.sinh(math.degrees(left))
+	return math.sinh(left)
 
 def coshyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.cosh(left)
-	else:
-		return math.cosh(math.degrees(left))
+	return math.cosh(left)
 
 def tanhyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.tanh(left)
-	else:
-		return math.tanh(math.degrees(left))
+	return math.tanh(left)
 
 def arcsinhyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.asinh(left)
-	else:
-		return math.asinh(math.degrees(left))
+	return math.asinh(left)
 
 def arccoshyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.acosh(left)
-	else:
-		return math.acosh(math.degrees(left))
+	return math.acosh(left)
 
 def arctanhyp(left, right):
-	if DocumentDictionary.isRad():
-		return math.atanh(left)
-	else:
-		return math.atanh(math.degrees(left))
+	return math.atanh(left)
 
 def squareroot(left, right):
 	return math.sqrt(left)
