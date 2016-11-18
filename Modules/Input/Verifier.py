@@ -1,64 +1,5 @@
 #!/usr/bin/python
 
-from Modules.DataStructures.MathFunctions import *
-from Modules.Output.UI import showError
-from Modules.Maths.FillTree import *
-from Modules.Maths.TreeProcessing import *
-
-eqList = [None] * 100
-
-
-#
-#   validate
-#   Takes a string and checks if it has any invalid mathematical syntax.
-#   IN: (String) The expression validate.
-#
-
-def runValidate(eq):
-    global eqList
-    eqList = [None] * 100
-    return validate(eq)
-
-def validate(equation):
-    eqList = parseStringToList(equation)
-    error = 0
-    parentheses = 0
-    for i,item in enumerate(eqList):
-        if item is '(':
-            parentheses += 1
-            nextI = eqList[i+1]
-        elif item is ')':
-            parentheses += -1
-        elif not item.isdigit() and item != 'x' and not isOperator(item) and not isConstant(item):
-            if item not in MathFunctions:
-                error = 1
-        elif isOperator(item):
-            nextI = eqList[i+1]
-            if isOperator(nextI):
-                error = 2
-    if parentheses != 0:
-        error = 3
-    return error
-
-def isOperator(c):
-	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
-		return 1
-	return 0
-
-def isConstant(c):
-    if c == 'pi' or c == 'e':
-        return 1
-    return 0
-
-def getErrorMsg(errorInt):
-   if errorInt == 1:
-       return "Invalid function in equation"
-   if errorInt == 2:
-       return "Two consecutive operators"
-   if errorInt == 3:
-       return "Parentheses mismatch"
-
-
 #
 #   Create a table indexing higher order of BEDMAS + Factorials
 #
@@ -91,9 +32,7 @@ MathFunctions = {
 }
 
 parse = []
-def initList():
-	global parse
-	parse = []
+
 #
 #   parseStringToList
 #   Takes a string and groups each term in the expression into a list.
@@ -101,10 +40,9 @@ def initList():
 #   OUT: (List) The parsed expression.
 #
 def parseStringToList(string):
-    initList()
-    parseString = ""
     length = len(string)
 
+    parseString = ""
     index = 0
     sIndex = 0
     #   Begin iterating the string
@@ -142,7 +80,7 @@ def parseStringToList(string):
                 parseString = ""
                 parse.append(string[index])
         index += 1
-        print parse
+
     return parse
 
 #
@@ -151,8 +89,6 @@ def parseStringToList(string):
 #   IN: (List) The list to search for bracket sets.
 #   OUT: (List) The condensed list expression.
 #
-#TODO FIX ISSUE WITH FUNCTION HAVING TWO COPIES OF ONE FUNCTION IN THE List
-#TODO FIX ISSUE WHERE PARSE IS NOT CLEARED AFTER COMPLETION OF A PARSE
 def setNestedBrackets(parse):
     parseLength = len(parse)
     openBracket = 0
@@ -235,17 +171,12 @@ def verify(parse):
             k+=1
     return parse.pop(0)
 
-
-def goRunAll(string):
-    print string
-    number = runValidate(string)
-    if number is 0:
-        initList()
-        someList = parseStringToList(string)
-        parenthesizedString = verify(someList)
-        goFill(parenthesizedString)
-        go()
-    else:
-        print string + " ",
-        print getErrorMsg(number)
-    return number
+'''
+function will do all the hard work
+'''
+def ranchMeUpDaddy(string):
+    hello = "string to make interpreter happy"
+    #someList = validatorFunction(string)
+    #parenthesizedString = verify(someList)
+    #goFill(parenthesizedString)
+    #go()
