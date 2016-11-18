@@ -3,6 +3,7 @@
 from Modules.DataStructures.MathFunctions import *
 from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
+import re
 
 eqList = [None] * 100
 
@@ -18,16 +19,21 @@ def validate(equation):
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
+        if parentheses < 0:
+            error = 3
+            break
         if item is '':
             continue
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
+            if nextI is ')' or nextI is '':
+                error = 3
+                break
         elif item is ')':
             parentheses += -1
-        elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item):
+        elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item) and not match(item):
             if item not in MathFunctions:
-                print item
                 error = 1
         elif isOperator(item):
             nextI = eqList[i+1]
@@ -44,6 +50,11 @@ def isFloat(val):
     except ValueError:
         return False
 
+def match(string):
+    if re.match(r"[0-9]+(.[0-9]+)?x", string):
+        return True
+    else:
+        return False
 
 def runValidate(eq):
     global eqList
@@ -256,7 +267,7 @@ def goRunAll(string):
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
-        go()
+        #go()
     else:
         print string + " ",
         print getErrorMsg(number)
