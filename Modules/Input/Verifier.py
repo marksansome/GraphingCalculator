@@ -17,6 +17,8 @@ def validate(equation):
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
+        if item is '':
+            continue
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
