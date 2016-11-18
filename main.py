@@ -11,4 +11,5 @@ if len(sys.argv) == 2:
             if not status:
                 print line.rstrip() + " = " + str(getAnswer())
 else:
+    goRunAll("x^2-x")
     UI()

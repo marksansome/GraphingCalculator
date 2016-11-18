@@ -8,10 +8,6 @@ from Modules.Maths.FillTree import *
 import tkFont
 import tkMessageBox
 
-
-
-
-
 def saveSettings(mode):
 	fpt = open('settings.txt', 'w')
 	fpt.write("mode=" + mode + "\n")
@@ -51,7 +47,8 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
-		#graphing.graph(root)
+		#goRunAll(entry)
+		graphing.graph(root)
 		op.append(entry)
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")
@@ -61,7 +58,7 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 
 def checkRanges(minRange, maxRange):
 	if minRange > maxRange:
-		showError()
+		showError("Range Invalid")
 		return False
 	else:
 		return True
