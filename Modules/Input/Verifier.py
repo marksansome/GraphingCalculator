@@ -6,7 +6,6 @@ from Modules.Maths.TreeProcessing import *
 
 eqList = [None] * 100
 
-
 #
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
@@ -20,6 +19,7 @@ def runValidate(eq):
 
 def validate(equation):
     eqList = parseStringToList(equation)
+    print eqList
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
@@ -230,7 +230,6 @@ def verify(parse):
 
 
 def goRunAll(string):
-
     number = runValidate(string)
     if number is 0:
         initList()
