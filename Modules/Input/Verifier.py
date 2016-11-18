@@ -236,7 +236,7 @@ def verify(parse):
 
 
 def goRunAll(string):
-    print string
+
     number = runValidate(string)
     if number is 0:
         initList()
