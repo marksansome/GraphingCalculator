@@ -9,13 +9,14 @@ import tkFont
 import tkMessageBox
 
 def saveSettings(mode):
-	fpt = open('settings.txt', 'w')
+	fpt = open('Assets/settings.ini', 'w')
+	fpt.write("[settings]")
 	fpt.write("mode=" + mode + "\n")
 	fpt.close()
 
 def configureSettings():
 	SETTINGS = []
-	fpt = open('settings.txt', 'r')
+	fpt = open('Assets/settings.ini', 'r')
 	dataFile = fpt.read()
 	SETTINGS = dataFile.split('\n')
 	fpt.close()
@@ -47,7 +48,7 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
-		#goRunAll(entry)
+		#goRunAll(ENTRY)
 		graphing.graph(root)
 		op.append(entry)
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
