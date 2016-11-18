@@ -18,6 +18,23 @@ eq = "2x+5"
 code = validate(eq)
 assertEqual("The equation " + eq + " is a valid equation.",0,code)
 
+eq = "2x+s(5)"
+code = validate(eq)
+assertEqual("The equation " + eq + " is an invalid equation.",1,code)
+
+eq = "2x+sin(x)"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+eq = "2+5"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+eq = "(1+2)^3*4"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+
 #
 #   Section two - Test Verify
 #

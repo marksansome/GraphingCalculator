@@ -6,19 +6,12 @@ from Modules.Maths.TreeProcessing import *
 
 eqList = [None] * 100
 
-
 #
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
 #   IN: (String) The expression validate.
 #   OUT: (INT) error code, 0 on success
 #
-
-def runValidate(eq):
-    global eqList
-    eqList = [None] * 100
-    return validate(eq)
-
 def validate(equation):
     eqList = parseStringToList(equation)
     error = 0
@@ -39,6 +32,11 @@ def validate(equation):
     if parentheses != 0:
         error = 3
     return error
+
+def runValidate(eq):
+    global eqList
+    eqList = [None] * 100
+    return validate(eq)
 
 def isOperator(c):
 	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
@@ -135,14 +133,13 @@ def parseStringToList(string):
                 parseString += string[index]
             #   Otherwise the value is an operator and we should the previous term, then the operator
             else:
-                #   If there are terms to print print em
+                #   If there are terms to print em
                 if parseString is not "":
                     parse.append(parseString)
                 #   Clean up parse string
                 parseString = ""
                 parse.append(string[index])
         index += 1
-        print parse
     return parse
 
 #
@@ -151,8 +148,6 @@ def parseStringToList(string):
 #   IN: (List) The list to search for bracket sets.
 #   OUT: (List) The condensed list expression.
 #
-#TODO FIX ISSUE WITH FUNCTION HAVING TWO COPIES OF ONE FUNCTION IN THE List
-#TODO FIX ISSUE WHERE PARSE IS NOT CLEARED AFTER COMPLETION OF A PARSE
 def setNestedBrackets(parse):
     parseLength = len(parse)
     openBracket = 0
