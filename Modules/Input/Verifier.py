@@ -2,6 +2,8 @@
 
 from Modules.DataStructures.MathFunctions import *
 from Modules.Output.UI import showError
+from Modules.Maths.FillTree import *
+from Modules.Maths.TreeProcessing import *
 
 #
 #   validate
@@ -10,8 +12,7 @@ from Modules.Output.UI import showError
 #
 def validate(equation):
     eqList = parseStringToList(equation)
-    error = None
-    print eqList
+    error = 0
     parentheses = 0
 
     for i,item in enumerate(eqList):
@@ -22,17 +23,14 @@ def validate(equation):
             parentheses += -1
         elif not item.isdigit() and item != 'x' and not isOperator(item) and not isConstant(item):
             if item not in MathFunctions:
-                error = "Invalid function in equation"
+                error = 1
         elif isOperator(item):
             nextI = eqList[i+1]
             if isOperator(nextI):
-                error = "Two consecutive operators"
+                error = 2
     if parentheses != 0:
-        error = "Parentheses mismatch"
-    if error:
-        showError(error)
-    else:
-        print "okay"
+        error = 3
+    return error
 
 def isOperator(c):
 	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
@@ -43,6 +41,14 @@ def isConstant(c):
     if c == 'pi' or c == 'e':
         return 1
     return 0
+
+def getErrorMsg(errorInt):
+   if errorInt == 1:
+       return "Invalid function in equation"
+   if errorInt == 2:
+       return "Two consecutive operators"
+   if errorInt == 3:
+       return "Parentheses mismatch"
 
 
 #
@@ -220,9 +226,11 @@ def verify(parse):
 def goRunAll(string):
     number = validate(string)
     if number is 0:
-        someList = validatorFunction(string)
+        someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
         go()
     else:
+        print string + " ",
         print getErrorMsg(number)
+    return number
