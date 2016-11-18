@@ -11,7 +11,7 @@ from Modules.Output.UI import showError
 #
 def validate(equation):
     eqList = parseStringToList(equation)
-    error = None
+    error = 0
     print eqList
     parentheses = 0
 
@@ -23,17 +23,22 @@ def validate(equation):
             parentheses += -1
         elif not item.isdigit() and item != 'x' and not isOperator(item) and not isConstant(item):
             if item not in MathFunctions:
-                error = "Invalid function in equation"
+                error = 1
         elif isOperator(item):
             nextI = eqList[i+1]
             if isOperator(nextI):
-                error = "Two consecutive operators"
+                error = 2
     if parentheses != 0:
-        error = "Parentheses mismatch"
-    if error:
-        showError(error)
-    else:
-        print "okay"
+        error = 3
+    return error
+
+def getErrorMsg(errorInt):
+    if errorInt == 1:
+        return "Invalid function in equation"
+    if errorInt == 2:
+        return "Two consecutive operators"
+    if errorInt == 3:
+        return "Parentheses mismatch"
 
 def isOperator(c):
 	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
