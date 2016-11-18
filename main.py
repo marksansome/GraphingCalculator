@@ -14,6 +14,4 @@ for i in range(31, 100):
 table[0] = None
 
 DocumentDictionary.setTree(table)
-#Assets.iteratesDomain("x")
-
-UI()
+Assets.iteratesDomain("x")
