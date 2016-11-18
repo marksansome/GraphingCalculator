@@ -41,6 +41,8 @@ def validate(equation):
                 error = 2
     if parentheses != 0:
         error = 3
+    if not error:
+        print "okay"
     return error
 
 def isFloat(val):
@@ -263,6 +265,8 @@ def goRunAll(string):
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
+        tree = getTree()
+        print tree
         #go()
     else:
         print string + " ",
