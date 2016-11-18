@@ -1,6 +1,8 @@
 from Modules.DataStructures.DocumentDictionary import *
 from Modules.DataStructures.Tree import *
 from Modules.Maths.Calculation import *
+#TODO:GET RID
+import traceback
 
 tree = []
 
@@ -16,21 +18,49 @@ def postOrderProcess(tree, root):
 		if not tree[rightChildIndex(root)] == None:
 			postOrderProcess(tree, rightChildIndex(root))
 	else:
-		process(tree, parentIndex(root))
+		if not process(tree, parentIndex(root)):
+			return False
 
 #Loop to process over and over again until there's a final result
 def processLoop(main):
-	#TODO: copy tree or not, error could hide here
 	tree = main
+	#changing stuff in order to be numbers and no constants or factorials anymore
 	while not isOperand(tree[1]):
-		postOrderProcess(tree, 1)
+		try:
+			postOrderProcess(tree, 1)
+		except ValueError, e:
+			if (e.message == "math domain error"):
+				return None
 	return tree[1]
 
+#Prepare the tree for the process
+def prepareTree(tree):
+	tree = replaceVariables("pi", math.pi, tree)
+	tree = replaceVariables("e", math.e, tree)
+	tree = replaceFacto(tree)
+	return tree
+
+#Replaces character variables with defined values
 def replaceVariables(variable, value, table):
 	result = list(table)
 	for i in range(len(table)):
 		if table[i] == variable:
 			result[i] = value
+	return result
+
+#Factorials handling
+def replaceFacto(table):
+	result = list(table)
+	for i in range(len(table)):
+		try:
+			if '!' in table[i]:
+				tmp = table[i].replace('!', '')
+				try:
+					result[i] = math.factorial(float(tmp))
+				except ValueError:
+					useless = None
+		except TypeError:
+			useless = None
 	return result
 
 #Iterates and create a table from the low boundary to the up boundary, given the variable as a string ("x" or "y" or ..)
@@ -45,11 +75,6 @@ def iteratesDomain(tree):
 	preimage = []
 	image = []
 	j = domainLowBound
-
-	#Managing constants
-	table = replaceVariables("pi", math.pi, table)
-	table = replaceVariables("e", math.e, table)
-	#TODO:TEST THAT SHIT
 
 	#Cause of int rounding inside "range", we need to set the last value, that's why the + 1 is there
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
@@ -67,6 +92,7 @@ def iteratesDomain(tree):
 
 	#Writing the table of values inside the global dictionary
 	setTableOfValues(tableOfValues)
+	print tableOfValues
 	return tableOfValues
 
 #Check if this a number or not from a string
@@ -79,11 +105,18 @@ def isOperand(item):
 
 #GOOOOOOO LET'S RANCH IT UP, triggers the calculation process
 def go():
-	docTree = getTree()
-	#If we have a variable in the tree, it means we have to iterate on a domain
-	if "x" in docTree:
-		iteratesDomain(docTree)
-	#If not we just expect a single number as an answer
-	else:
-		result = processLoop(docTree)
-		setAnswer(result)
+	try:
+		docTree = getTree()
+		#If we have a variable in the tree, it means we have to iterate on a domain
+		if "x" in docTree:
+			docTree = prepareTree(docTree)
+			iteratesDomain(docTree)
+		#If not we just expect a single number as an answer
+		else:
+			docTree = prepareTree(docTree)
+			result = processLoop(docTree)
+			setAnswer(result)
+	except TypeError:
+		#TODO:set error
+		setAnswer(None)
+		setTableOfValues(None)
