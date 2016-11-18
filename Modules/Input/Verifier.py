@@ -6,6 +6,8 @@ from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
 
 eqList = [None] * 100
+
+
 #
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
@@ -89,7 +91,9 @@ MathFunctions = {
 }
 
 parse = []
-
+def initList():
+	global parse
+	parse = []
 #
 #   parseStringToList
 #   Takes a string and groups each term in the expression into a list.
@@ -97,9 +101,10 @@ parse = []
 #   OUT: (List) The parsed expression.
 #
 def parseStringToList(string):
+    initList()
+    parseString = ""
     length = len(string)
 
-    parseString = ""
     index = 0
     sIndex = 0
     #   Begin iterating the string
@@ -235,6 +240,7 @@ def goRunAll(string):
     print string
     number = runValidate(string)
     if number is 0:
+        initList()
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
