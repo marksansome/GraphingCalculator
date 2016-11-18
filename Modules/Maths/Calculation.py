@@ -1,13 +1,16 @@
-#File responsible for managing calculations at the finest (i.e bottom of the tree)
+# File responsible for managing calculations at the finest (i.e bottom of the tree)
 from __future__ import division
 from Modules.DataStructures import Tree
 from Modules.DataStructures import DocumentDictionary
+
 import math
 
-#process one node that is parent of operands nodes
+
+# process one node that is parent of operands nodes
 def process(tree, nodeIndex):
-	#security layer
-	#try:
+	# security layer and domain out of bound handling
+	try:
+		print ("mescouilles")
 		if tree[Tree.leftChildIndex(nodeIndex)] != None:
 			left = float(tree[Tree.leftChildIndex(nodeIndex)])
 		else:
@@ -22,42 +25,50 @@ def process(tree, nodeIndex):
 		tree[nodeIndex] = result
 		Tree.removeChilds(tree, nodeIndex)
 
-	# except ValueError, e:
-	# 	if (e.message == "math domain error"):
-	# 		return False
-	# 	print ("Value Error")
-		#TODO:error okay
+	except ValueError, e:
+		if (e.message == "math domain error"):
+			DocumentDictionary.setMathias(False)
 
-#calculate parent value given two operands child nodes
+
+# calculate parent value given two operands child nodes
 def calculate(parent, left, right):
-	#TODO: test that shit
-		result = operators[parent](left, right)
-		return result
-		#TODO:link domain eror
+	result = operators[parent](left, right)
+	return result
 
 # define the different function blocks
 def addition(left, right):
 	return left + right
 
+
 def multiplication(left, right):
 	return left * right
+
 
 def substraction(left, right):
 	return left - right
 
+
 def div(left, right):
-	#TODO: division by zero to be tested
+	# TODO: division by zero to be tested
 	try:
-		result = left/right
+		result = left / right
 		return result
 	except ZeroDivisionError:
 		return None
 
+
 def sinus(left, right):
+	#TODO:handle that
 	if DocumentDictionary.isRad():
+		print "here i am"
 		return math.sin(left)
 	else:
-		return math.sin(math.radians(left))
+		print "not here"
+		print left
+		tmp = math.radians(left)
+		print tmp
+		return math.sin(tmp)
+
 
 def cosinus(left, right):
 	if DocumentDictionary.isRad():
@@ -65,11 +76,13 @@ def cosinus(left, right):
 	else:
 		return math.cos(math.radians(left))
 
+
 def tangente(left, right):
 	if DocumentDictionary.isRad():
 		return math.tan(left)
 	else:
 		return math.tan(math.radians(left))
+
 
 def arcsinus(left, right):
 	if DocumentDictionary.isRad():
@@ -77,11 +90,13 @@ def arcsinus(left, right):
 	else:
 		return math.asin(math.radians(left))
 
+
 def arccosinus(left, right):
 	if DocumentDictionary.isRad():
 		return math.acos(left)
 	else:
 		return math.acos(math.radians(left))
+
 
 def arctangente(left, right):
 	if DocumentDictionary.isRad():
@@ -89,11 +104,13 @@ def arctangente(left, right):
 	else:
 		return math.atan(math.radians(left))
 
+
 def sinhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.sinh(left)
 	else:
 		return math.sinh(math.radians(left))
+
 
 def coshyp(left, right):
 	if DocumentDictionary.isRad():
@@ -101,11 +118,13 @@ def coshyp(left, right):
 	else:
 		return math.cosh(math.radians(left))
 
+
 def tanhyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.tanh(left)
 	else:
 		return math.tanh(math.radians(left))
+
 
 def arcsinhyp(left, right):
 	if DocumentDictionary.isRad():
@@ -113,11 +132,13 @@ def arcsinhyp(left, right):
 	else:
 		return math.asinh(math.radians(left))
 
+
 def arccoshyp(left, right):
 	if DocumentDictionary.isRad():
 		return math.acosh(left)
 	else:
 		return math.acosh(math.radians(left))
+
 
 def arctanhyp(left, right):
 	if DocumentDictionary.isRad():
@@ -125,17 +146,22 @@ def arctanhyp(left, right):
 	else:
 		return math.atanh(math.radians(left))
 
+
 def squareroot(left, right):
 	return math.sqrt(left)
+
 
 def power(left, right):
 	return math.pow(left, right)
 
+
 def log(left, right):
 	return math.log10(left)
 
+
 def ln(left, right):
 	return math.log(left)
+
 
 def exp(left, right):
 	# Handling both case left or right just in case, it's a "security" layer
@@ -147,10 +173,10 @@ def exp(left, right):
 
 # map the inputs to the function blocks
 operators = {
-	"+" : addition,
-	"*" : multiplication,
-	"-" : substraction,
-	"/" : div,
+	"+": addition,
+	"*": multiplication,
+	"-": substraction,
+	"/": div,
 	"sin": sinus,
 	"cos": cosinus,
 	"tan:": tangente,

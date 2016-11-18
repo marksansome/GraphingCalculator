@@ -17,9 +17,15 @@ dictionary = {
         "yValues": None
     },
     'tree' : None,
-    'isError' : ""
+    'isError' : "",
+	'mathias' : True
 }
+#TODO:remove MATHIAS SHIT THIS GUY SUCKS BUT DOES THE COMPLICATED STUFF
+def setMathias(whatever):
+	dictionary['mathias'] = whatever
 
+def getMathias():
+	return dictionary['mathias']
 #
 #   getName
 #   Get the value of name in the document dictionary.
@@ -144,6 +150,15 @@ def setType(val):
 #   OUT: NONE.
 #
 def setAnswer(val):
+    dictionary['answer'] = val
+
+#
+#   setRad
+#   Sets the radian value of the document dicitionary.
+#   IN: (Bool) the value to update.
+#   OUT: NONE.
+#
+def setRad(val):
     dictionary['answer'] = val
 
 #
