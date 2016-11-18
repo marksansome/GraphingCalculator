@@ -10,19 +10,16 @@ eqList = [None] * 100
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
 #   IN: (String) The expression validate.
+#   OUT: (INT) error code, 0 on success
 #
-
-def runValidate(eq):
-    global eqList
-    eqList = [None] * 100
-    return validate(eq)
-
 def validate(equation):
     eqList = parseStringToList(equation)
     print eqList
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
+        if item is '':
+            continue
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
@@ -38,6 +35,11 @@ def validate(equation):
     if parentheses != 0:
         error = 3
     return error
+
+def runValidate(eq):
+    global eqList
+    eqList = [None] * 100
+    return validate(eq)
 
 def isOperator(c):
 	if(c == '+' or c == '-' or c == '*' or c =='/' or c == '^'):
@@ -130,7 +132,7 @@ def parseStringToList(string):
                 parseString += string[index]
             #   Otherwise the value is an operator and we should the previous term, then the operator
             else:
-                #   If there are terms to print print em
+                #   If there are terms to print em
                 if parseString is not "":
                     parse.append(parseString)
                 #   Clean up parse string
@@ -228,7 +230,12 @@ def verify(parse):
             k+=1
     return parse.pop(0)
 
-
+#
+#   goRunAll
+#   This function runs everything. Calls verifying functions, parenthesize, and go()
+#   IN: (String) User inputted string.
+#   OUT: (Status INT) Success on 0, (See getErrorMessage)
+#
 def goRunAll(string):
     number = runValidate(string)
     if number is 0:

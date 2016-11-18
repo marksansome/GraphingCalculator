@@ -7,10 +7,36 @@ from Modules.Input.Verifier import *
 #   Verify Driver
 #   Verify the functions within verifier
 #
-printHeader("Verifier Driver", "Testing functions in verifier: verify, parseStringToList.")
+printHeader("Verifier Driver", "Testing functions in verifier: verify, parseStringToList, validate.")
 
 #
-#   Section one - Test Verify
+#   Section one - Test Validate
+#
+printSectionHeader("Test Validator", "Test possible branch cases of the validation function.")
+
+eq = "2x+5"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+eq = "2x+s(5)"
+code = validate(eq)
+assertEqual("The equation " + eq + " is an invalid equation.",1,code)
+
+eq = "2x+sin(x)"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+eq = "2+5"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+eq = "(1+2)^3*4"
+code = validate(eq)
+assertEqual("The equation " + eq + " is a valid equation.",0,code)
+
+
+#
+#   Section two - Test Verify
 #
 printSectionHeader("Test Verify", "Test possible branch cases of the parsing functions.")
 

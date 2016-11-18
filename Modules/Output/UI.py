@@ -41,7 +41,7 @@ def configureSettings():
 
 	window.mainloop()
 
-def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, interval):
+def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, maxRange, interval):
 	boldFont = tkFont.Font(weight = "bold")
 	if checkRanges(minRange, maxRange):
 		DocumentDictionary.setUpperBound(maxRange)
@@ -49,7 +49,7 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
 		goRunAll(entry)
-		graph(root)
+		graph(graphCanvas)
 		op.append(entry)
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")
@@ -63,6 +63,10 @@ def checkRanges(minRange, maxRange):
 		return False
 	else:
 		return True
+
+def clearGraph(canvas, height, width):
+	canvas.delete("all")
+	drawLines(height, width, canvas)
 
 def showError(string):
 	errorVar.set("ERROR: " + string)
@@ -82,7 +86,8 @@ def AddToEntryBrackets(entry, value):
 def UI():
 	root = Tk()
 	BUTTON_WIDTH = 5
-
+	height = 400
+	width = 400
 	HISTORY = ["x"]
 
 	variable = StringVar(root)
@@ -136,18 +141,28 @@ def UI():
 	historyButton.grid(row = 0, column = 1)
 	historyButton.configure(highlightbackground = "#000000")
 
+	#clear graph
+	clearGraphButton = Button(settingsFrame, text="Clear Graph", width = BUTTON_WIDTH * 2, command = lambda: clearGraph(graphCanvas, height, width),bg = "#d6d6c2", font = boldFont)
+	clearGraphButton.grid(row = 0, column = 2)
+	clearGraphButton.configure(highlightbackground = "#000000")
+
 	#settings Button
 	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH + 1, command = lambda: configureSettings(),bg = "#d6d6c2", font = boldFont)
 	settingsButton.configure(highlightbackground = "#000000")
-	settingsButton.grid(row = 0, column = 2)
+	settingsButton.grid(row = 0, column = 3)
 	exitButton = Button(settingsFrame, text = "Exit Program", command = root.destroy,bg = "#d6d6c2", font = boldFont)
 	exitButton.configure(highlightbackground = "#000000")
-	exitButton.grid(row = 0, column = 3)
+	exitButton.grid(row = 0, column = 4)
+
 	#error
 	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
 
+	#graph
+	graphCanvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
+	graphCanvas.grid(row = 4, column = 0)
+	drawLines(height, width, graphCanvas)
 
-	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(graphCanvas, settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	settingsFrame.grid(row = 1, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
