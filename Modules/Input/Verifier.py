@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
 from Modules.DataStructures.MathFunctions import *
-from Modules.Output.UI import showError
 from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
+
+eqList = [None] * 100
+
 
 #
 #   validate
@@ -11,11 +13,16 @@ from Modules.Maths.TreeProcessing import *
 #   IN: (String) The expression validate.
 #   OUT: (INT) error code, 0 on success
 #
+
+def runValidate(eq):
+    global eqList
+    eqList = [None] * 100
+    return validate(eq)
+
 def validate(equation):
     eqList = parseStringToList(equation)
     error = 0
     parentheses = 0
-
     for i,item in enumerate(eqList):
         if item is '(':
             parentheses += 1
@@ -84,7 +91,9 @@ MathFunctions = {
 }
 
 parse = []
-
+def initList():
+	global parse
+	parse = []
 #
 #   parseStringToList
 #   Takes a string and groups each term in the expression into a list.
@@ -92,9 +101,10 @@ parse = []
 #   OUT: (List) The parsed expression.
 #
 def parseStringToList(string):
+    initList()
+    parseString = ""
     length = len(string)
 
-    parseString = ""
     index = 0
     sIndex = 0
     #   Begin iterating the string
@@ -132,7 +142,7 @@ def parseStringToList(string):
                 parseString = ""
                 parse.append(string[index])
         index += 1
-
+        print parse
     return parse
 
 #
@@ -141,6 +151,8 @@ def parseStringToList(string):
 #   IN: (List) The list to search for bracket sets.
 #   OUT: (List) The condensed list expression.
 #
+#TODO FIX ISSUE WITH FUNCTION HAVING TWO COPIES OF ONE FUNCTION IN THE List
+#TODO FIX ISSUE WHERE PARSE IS NOT CLEARED AFTER COMPLETION OF A PARSE
 def setNestedBrackets(parse):
     parseLength = len(parse)
     openBracket = 0
@@ -230,8 +242,10 @@ def verify(parse):
 #   OUT: (Status INT) Success on 0, (See getErrorMessage)
 #
 def goRunAll(string):
-    number = validate(string)
+    print string
+    number = runValidate(string)
     if number is 0:
+        initList()
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
