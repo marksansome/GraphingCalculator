@@ -48,6 +48,7 @@ def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, ma
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
+		DocumentDictionary.setAnswer(None)
 		errorCode = goRunAll(entry)
 		if errorCode is 0:
 			if DocumentDictionary.getAnswer() is None:
