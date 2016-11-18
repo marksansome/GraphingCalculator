@@ -5,16 +5,22 @@ from Modules.Output.UI import showError
 from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
 
+eqList = [None] * 100
 #
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
 #   IN: (String) The expression validate.
 #
+
+def runValidate(eq):
+    global eqList
+    eqList = [None] * 100
+    return validate(eq)
+
 def validate(equation):
     eqList = parseStringToList(equation)
     error = 0
     parentheses = 0
-
     for i,item in enumerate(eqList):
         if item is '(':
             parentheses += 1
@@ -131,7 +137,7 @@ def parseStringToList(string):
                 parseString = ""
                 parse.append(string[index])
         index += 1
-
+        print parse
     return parse
 
 #
@@ -140,6 +146,8 @@ def parseStringToList(string):
 #   IN: (List) The list to search for bracket sets.
 #   OUT: (List) The condensed list expression.
 #
+#TODO FIX ISSUE WITH FUNCTION HAVING TWO COPIES OF ONE FUNCTION IN THE List
+#TODO FIX ISSUE WHERE PARSE IS NOT CLEARED AFTER COMPLETION OF A PARSE
 def setNestedBrackets(parse):
     parseLength = len(parse)
     openBracket = 0
@@ -224,7 +232,8 @@ def verify(parse):
 
 
 def goRunAll(string):
-    number = validate(string)
+    print string
+    number = runValidate(string)
     if number is 0:
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
