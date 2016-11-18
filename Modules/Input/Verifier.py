@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from Modules.DataStructures.MathFunctions import *
-from Modules.Output.UI import showError
 from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
 
