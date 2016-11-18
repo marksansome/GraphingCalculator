@@ -6,6 +6,39 @@ from Modules.DataStructures import DocumentDictionary
 import tkFont
 import tkMessageBox
 
+def saveSettings(mode):
+	fpt = open('settings.txt', 'w')
+	fpt.write("mode=" + mode + "\n")
+	fpt.close()
+
+def configureSettings():
+	SETTINGS = []
+	fpt = open('settings.txt', 'r')
+	dataFile = fpt.read()
+	SETTINGS = dataFile.split('\n')
+	fpt.close()
+	window = Tk()
+	window.title("Settings")
+	window.configure(background = "#f2f2f2")
+	frame = Frame(window, bg="#f2f2f2", height=400, width=300)
+	frame.pack()
+
+	#save/exit  button
+	saveButton = Button(frame, text = "Save", command = lambda: saveSettings(angleVar.get()))
+	saveButton.grid(row = 0, column = 0)
+	exitButton = Button(frame, text = "Exit", command = window.destroy)
+	exitButton.grid(row = 0, column = 1)
+	#angle settings
+	MODES = ["radians", "degrees", "gradians"]
+	angleVar = StringVar(frame)
+	angleVar.set(MODES[0])
+	angleLabel = Label(frame, text="Mode",width=6)
+	angleLabel.grid(row = 1, column = 0)
+	angle = apply(OptionMenu, (frame, angleVar) + tuple(MODES))
+	angle.grid(row = 1, column = 1)
+
+	window.mainloop()
+
 def generateGraph(frame, op, var, root, entry, minRange, maxRange, interval):
 	if checkRanges(minRange, maxRange):
 		DocumentDictionary.setUpperBound(maxRange)
@@ -88,6 +121,8 @@ def UI():
 	#settings Button
 	settingsButton = Button(entryFrame, text="Settings", width = BUTTON_WIDTH, command = lambda: configureSettings())
 	settingsButton.grid(row = 1, column = 2)
+	exitButton = Button(entryFrame, text = "Exit Program", command = root.destroy)
+	exitButton.grid(row = 1, column = 3)
 	#error
 	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
 
