@@ -1,9 +1,9 @@
 #!/usr/bin/python
 from Tkinter import *
-from Modules.Output import graphing
-from Modules.DataStructures import DocumentDictionary
+from Modules.Output.graphing import *
 from Modules.Input.Verifier import *
 from Modules.Maths.FillTree import *
+from Modules.DataStructures import DocumentDictionary
 
 import tkFont
 import tkMessageBox
@@ -48,8 +48,8 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
-		#goRunAll(ENTRY)
-		graphing.graph(root)
+		goRunAll(entry)
+		graph(root)
 		op.append(entry)
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")

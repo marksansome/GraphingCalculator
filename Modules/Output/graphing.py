@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import Tkinter
 import tkMessageBox
-import numbers
 from Modules.DataStructures import DocumentDictionary
 
 #printing points
@@ -38,10 +37,6 @@ def graph(root):
 
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
-
-	#button to quit
-	quitButton = Tkinter.Button(root, text ="Close Graphing Calculator", command = root.destroy)
-
 
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
