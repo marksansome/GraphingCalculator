@@ -8,9 +8,6 @@ from Modules.Maths.FillTree import *
 import tkFont
 import tkMessageBox
 
-
-
-
 def saveSettings(mode):
 	fpt = open('settings.txt', 'w')
 	fpt.write("mode=" + mode + "\n")
@@ -50,7 +47,8 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
-		#graphing.graph(root)
+		#goRunAll(entry)
+		graphing.graph(root)
 		op.append(entry)
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")
@@ -60,7 +58,7 @@ def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, inter
 
 def checkRanges(minRange, maxRange):
 	if minRange > maxRange:
-		showError()
+		showError("Range Invalid")
 		return False
 	else:
 		return True
@@ -84,10 +82,10 @@ def UI():
 	root = Tk()
 	BUTTON_WIDTH = 5
 
-	OPTIONS = ["x"]
+	HISTORY = ["x"]
 
 	variable = StringVar(root)
-	variable.set(OPTIONS[0])
+	variable.set(HISTORY[0])
 
 	boldFont = tkFont.Font(weight = "bold")
 	global errorVar
@@ -116,7 +114,7 @@ def UI():
 	intervalLabel = Label(entryFrame, text = "Interval", font = boldFont)
 	interval = Spinbox(entryFrame, increment = 0.1, from_ = 0.1, to = 10)
 
-	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
 	#minimum ranch
 	minLabel = Label(entryFrame, text = "Min", font = boldFont, bg = "#f2f2f2")
@@ -138,7 +136,7 @@ def UI():
 	historyButton.configure(highlightbackground = "#000000")
 
 	#settings Button
-	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH, command = lambda: configureSettings(),bg = "#d6d6c2", font = boldFont)
+	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH + 1, command = lambda: configureSettings(),bg = "#d6d6c2", font = boldFont)
 	settingsButton.configure(highlightbackground = "#000000")
 	settingsButton.grid(row = 0, column = 2)
 	exitButton = Button(settingsFrame, text = "Exit Program", command = root.destroy,bg = "#d6d6c2", font = boldFont)
@@ -148,7 +146,7 @@ def UI():
 	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
 
 
-	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
+	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
 	settingsFrame.grid(row = 1, column = 0)
 	entry.grid(row = 0 , column = 1, padx = 0)
