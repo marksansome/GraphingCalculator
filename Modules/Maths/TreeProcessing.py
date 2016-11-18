@@ -4,12 +4,15 @@ from Modules.DataStructures.Tree import *
 from Modules.Maths.Calculation import *
 #from Modules.Maths.Assets import *
 
+
 tree = []
 
 #Processing the tree and make calculations of the bottom values of the tree
 def postOrderProcess(tree, root):
 	#stands for not a number
+
 	nAn = not isOperand(tree[root])
+
 	if nAn:
 		#verifrying there's something to deal with at the left child
 		if not tree[leftChildIndex(root)] == None:
@@ -24,6 +27,7 @@ def postOrderProcess(tree, root):
 def processLoop(main):
 	#TODO: copy tree or not, error could hide here
 	tree = main
+
 	while not isOperand(tree[1]):
 		postOrderProcess(tree, 1)
 	return tree[1]
