@@ -38,10 +38,6 @@ def graph(root):
 	# draws canvas and lines
 	canvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
 
-	#button to quit
-	quitButton = Tkinter.Button(root, text ="Close Graphing Calculator", command = root.destroy)
-
-
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
 	drawPoints(x, y, height, width, canvas)
