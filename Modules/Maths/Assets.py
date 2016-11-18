@@ -1,5 +1,6 @@
 from Modules.DataStructures import DocumentDictionary
 from Modules.Maths import TreeProcessing
+import math
 #The functions in this file are needed to "prepare" the tree from the input to the calculation process
 #This includes variables managment, outputting a table working for the output as a graph and so on
 
@@ -24,6 +25,11 @@ def iteratesDomain(tree):
 	image = []
 	j = domainLowBound
 
+	#Managing constants
+	table = replaceVariables("pi", math.pi, table)
+	table = replaceVariables("e", math.e, table)
+	#TODO:TEST THAT SHIT
+
 	#Cause of int rounding inside "range", we need to set the last value, that's why the + 1 is there
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
 		preimage.append(j)
@@ -41,6 +47,14 @@ def iteratesDomain(tree):
 	#Writing the table of values inside the global dictionary
 	DocumentDictionary.setTableOfValues(tableOfValues)
 	return tableOfValues
+
+#Check if this a number or not from a string
+def isOperand(item):
+	try:
+		float(item)
+		return True
+	except ValueError:
+		return False
 
 #GOOOOOOO LET'S RANCH IT UP, triggers the calculation process
 def go():
