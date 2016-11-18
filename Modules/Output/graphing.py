@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import Tkinter
 import tkMessageBox
-import numbers
 from Modules.DataStructures import DocumentDictionary
 
 #printing points
