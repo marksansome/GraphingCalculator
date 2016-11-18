@@ -14,6 +14,7 @@ eqList = [None] * 100
 #
 def validate(equation):
     eqList = parseStringToList(equation)
+    print eqList
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
@@ -24,8 +25,9 @@ def validate(equation):
             nextI = eqList[i+1]
         elif item is ')':
             parentheses += -1
-        elif not item.isdigit() and item != 'x' and not isOperator(item) and not isConstant(item):
+        elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item):
             if item not in MathFunctions:
+                print item
                 error = 1
         elif isOperator(item):
             nextI = eqList[i+1]
@@ -34,6 +36,14 @@ def validate(equation):
     if parentheses != 0:
         error = 3
     return error
+
+def isFloat(val):
+    try:
+        float(val)
+        return True
+    except ValueError:
+        return False
+
 
 def runValidate(eq):
     global eqList
