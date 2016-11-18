@@ -1,14 +1,14 @@
 #File responsible for handling all the recursive parsing of the tree
 from Modules.DataStructures import Tree
 from Modules.Maths import Calculation
-import numbers
+from Modules.Maths import Assets
 
 tree = []
 
 #Processing the tree and make calculations of the bottom values of the tree
 def postOrderProcess(tree, root):
 	#stands for not a number
-	nAn = not isinstance(tree[root], numbers.Number)
+	nAn = not Assets.isOperand(tree[root])
 	if nAn:
 		#verifrying there's something to deal with at the left child
 		if not tree[Tree.leftChildIndex(root)] == None:
@@ -23,7 +23,6 @@ def postOrderProcess(tree, root):
 def processLoop(main):
 	#TODO: copy tree or not, error could hide here
 	tree = main
-	print tree[1]
-	while not isinstance(tree[1], numbers.Number):
+	while not Assets.isOperand(tree[1]):
 		postOrderProcess(tree, 1)
 	return tree[1]
