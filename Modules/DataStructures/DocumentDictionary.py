@@ -7,7 +7,6 @@ dictionary = {
     'name' : "",
     'type' : "",
     'answer' : "",
-    'radian': True,
     'scale' : 0.1,
     'lowerBound' : -10,
     'upperBound' : 10,
@@ -46,15 +45,6 @@ def getType():
 #
 def getAnswer():
     return dictionary['answer']
-
-#
-#   isRad
-#   Get the value of radian in the document dictionary.
-#   IN: NONE.
-#   OUT: (Bool) name.
-#
-def isRad():
-    return dictionary['radian']
 
 #
 #   getScale
