@@ -9,6 +9,7 @@ from Modules.Maths.TreeProcessing import *
 #   validate
 #   Takes a string and checks if it has any invalid mathematical syntax.
 #   IN: (String) The expression validate.
+#   OUT: (INT) error code, 0 on success
 #
 def validate(equation):
     eqList = parseStringToList(equation)
@@ -222,7 +223,12 @@ def verify(parse):
             k+=1
     return parse.pop(0)
 
-
+#
+#   goRunAll
+#   This function runs everything. Calls verifying functions, parenthesize, and go()
+#   IN: (String) User inputted string.
+#   OUT: (Status INT) Success on 0, (See getErrorMessage)
+#
 def goRunAll(string):
     number = validate(string)
     if number is 0:
