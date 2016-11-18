@@ -32,3 +32,16 @@ setTree([None, '+', '!', '2', '+', None, None, '2', '4', None, None, None, None,
 go()
 ans = getAnswer()
 assertEqual("The equation " + eq + " yields " + str(ans)  + ".", ans, 722)
+
+eq = "(pi+e)"
+setTree([None, '+', "pi", "e", None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None])
+go()
+ans = getAnswer()
+assertEqual("The equation " + eq + " yields " + str(ans)  + ".", ans, math.e + math.pi)
+
+eq = "6!"
+setTree([None, '6!', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None])
+go()
+ans = getAnswer()
+assertEqual("The equation " + eq + " yields " + str(ans)  + ".", ans, math.factorial(6))
+
