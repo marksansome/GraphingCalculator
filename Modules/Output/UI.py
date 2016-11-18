@@ -8,10 +8,10 @@ from Modules.Maths.FillTree import *
 import tkFont
 import tkMessageBox
 
-<<<<<<< HEAD
+
 def generateGraph(op, var, root, entry, minRange, maxRange, interval):
 	if checkRanges(minRange, maxRange): 
-=======
+
 def saveSettings(mode):
 	fpt = open('settings.txt', 'w')
 	fpt.write("mode=" + mode + "\n")
@@ -47,21 +47,19 @@ def configureSettings():
 def generateGraph(settingsFrame, op, var, root, entry, minRange, maxRange, interval):
 	boldFont = tkFont.Font(weight = "bold")
 	if checkRanges(minRange, maxRange):
->>>>>>> RyansRanchBranch
 		DocumentDictionary.setUpperBound(maxRange)
 		DocumentDictionary.setLowerBound(minRange)
 		DocumentDictionary.setScale(interval)
 		DocumentDictionary.setType(entry)
 		#graphing.graph(root)
 		op.append(entry)
-<<<<<<< HEAD
 		history = apply(OptionMenu, (root, var) + tuple(op))
 		history.grid(row = 0, column = 7)
-=======
+
 		history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 		history.configure(highlightbackground = "#000000")
 		history.grid(row = 0, column = 0)
->>>>>>> RyansRanchBranch
+
 		errorVar.set("")
 	return
 
@@ -99,12 +97,12 @@ def UI():
 	boldFont = tkFont.Font(weight = "bold")
 	global errorVar
 	errorVar = StringVar()
-<<<<<<< HEAD
+
 	#lambda: parseString(entry.get())
-=======
+
 
 	#Setting up frames and root
->>>>>>> RyansRanchBranch
+
 	root.title('Name')
 	root.configure(background = "#f2f2f2")
 	frame = Frame(root, bg = "#f2f2f2")
@@ -112,7 +110,6 @@ def UI():
 	settingsFrame = Frame(root, bg = "#f2f2f2")
 	space = Frame(frame, width = 20, height = 4, bg = "#f2f2f2")
 	entry = Entry(entryFrame, width = 40)
-<<<<<<< HEAD
 
 	minLabel = Label(entryFrame, text = "Min")
 	minLabel = Label(entryFrame, text = "Min", font = boldFont)
@@ -128,7 +125,7 @@ def UI():
 	historyButton.grid(row = 0, column = 8)
 
 	errorLabel = Label(entryFrame, textvariable = errorVar, font = boldFont)
-=======
+
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(settingsFrame, OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 
 	#minimum ranch
@@ -159,7 +156,7 @@ def UI():
 	exitButton.grid(row = 0, column = 3)
 	#error
 	errorLabel = Label(settingsFrame, textvariable = errorVar, font = boldFont, bg = "#f2f2f2")
->>>>>>> RyansRanchBranch
+
 
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(OPTIONS, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
@@ -171,14 +168,14 @@ def UI():
 	minLabel.grid(row = 0, column = 4)
 	minRange.grid(row = 0, column = 5)
 	maxLabel.grid(row = 0, column = 6)
-<<<<<<< HEAD
+
 	maxRange.grid(row = 0, column = 7)
 	errorLabel.grid(row = 1, column = 3)
-=======
+
 	maxRange.grid(row = 0, column = 7, padx = 0)
 
 	errorLabel.grid(row = 0, column = 4)
->>>>>>> RyansRanchBranch
+
 	entry.focus_set()
 
 	num = [None]*10
