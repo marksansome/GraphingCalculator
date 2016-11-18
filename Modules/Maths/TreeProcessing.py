@@ -18,14 +18,19 @@ def postOrderProcess(tree, root):
 		if not tree[rightChildIndex(root)] == None:
 			postOrderProcess(tree, rightChildIndex(root))
 	else:
-		process(tree, parentIndex(root))
+		if not process(tree, parentIndex(root)):
+			return False
 
 #Loop to process over and over again until there's a final result
 def processLoop(main):
 	tree = main
 	#changing stuff in order to be numbers and no constants or factorials anymore
 	while not isOperand(tree[1]):
-		postOrderProcess(tree, 1)
+		try:
+			postOrderProcess(tree, 1)
+		except ValueError, e:
+			if (e.message == "math domain error"):
+				return None
 	return tree[1]
 
 #Prepare the tree for the process
@@ -87,6 +92,7 @@ def iteratesDomain(tree):
 
 	#Writing the table of values inside the global dictionary
 	setTableOfValues(tableOfValues)
+	print tableOfValues
 	return tableOfValues
 
 #Check if this a number or not from a string

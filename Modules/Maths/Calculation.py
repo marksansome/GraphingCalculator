@@ -7,7 +7,7 @@ import math
 #process one node that is parent of operands nodes
 def process(tree, nodeIndex):
 	#security layer
-	try:
+	#try:
 		if tree[Tree.leftChildIndex(nodeIndex)] != None:
 			left = float(tree[Tree.leftChildIndex(nodeIndex)])
 		else:
@@ -22,18 +22,17 @@ def process(tree, nodeIndex):
 		tree[nodeIndex] = result
 		Tree.removeChilds(tree, nodeIndex)
 
-	except ValueError:
-		print ("Value Error")
+	# except ValueError, e:
+	# 	if (e.message == "math domain error"):
+	# 		return False
+	# 	print ("Value Error")
 		#TODO:error okay
 
 #calculate parent value given two operands child nodes
 def calculate(parent, left, right):
 	#TODO: test that shit
-	try:
 		result = operators[parent](left, right)
 		return result
-	except ValueError:
-		return None
 		#TODO:link domain eror
 
 # define the different function blocks
