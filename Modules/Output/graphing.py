@@ -13,13 +13,14 @@ def drawPoints(x, y, height, width, canvas):
 	X = []
 	Y = []
 	for i in range(len(x)):
-		X.append(x[i] * scaleX + width/2)
-		Y.append(-y[i] * scaleX + height/2)
-		#draws points, uncomment to enable
-		#canvas.create_oval(X[i], Y[i], X[i], Y[i])
+		if isinstance(y[i], (int, float)):
+			X.append(x[i] * scaleX + width/2)
+			Y.append(-y[i] * scaleX + height/2)
+			#draws points, uncomment to enable
+			#canvas.create_oval(X[i], Y[i], X[i], Y[i])
 
 	global currentColour
-	for i in range(len(x) - 1):
+	for i in range(len(X) - 1):
 		canvas.create_line(X[i], Y[i], X[i+1], Y[i+1], fill=colours[currentColour])
 
 	if currentColour == 6:
