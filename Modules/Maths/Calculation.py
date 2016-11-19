@@ -58,9 +58,7 @@ def div(left, right):
 
 
 def sinus(left, right):
-	#print "allthewayup" + str(DocumentDictionary.isRad())
 	if DocumentDictionary.isRad():
-		print "wololo"
 		return math.sin(left)
 	else:
 		return math.sin(math.radians(left))

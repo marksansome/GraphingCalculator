@@ -112,7 +112,6 @@ def isOperand(item):
 def go():
 	try:
 		docTree = getTree()
-		print docTree
 		# If we have a variable in the tree, it means we have to iterate on a domain
 		if "x" in docTree:
 			docTree = prepareTree(docTree)

@@ -15,7 +15,6 @@ eqList = [None] * 100
 #
 def validate(equation):
     eqList = parseStringToList(equation)
-    print eqList
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
@@ -43,8 +42,6 @@ def validate(equation):
                 break
     if parentheses != 0:
         error = 3
-    if not error:
-        print "okay"
     return error
 
 def isFloat(val):
@@ -246,7 +243,6 @@ def verify(parse):
                     parse.pop(k-1)
                     parse.pop(k-1)
                 except IndexError:
-                    print "negative?"
                     myStr = "(0-" + num + ")"
 
                 #   Combine them into one element
@@ -281,7 +277,6 @@ def goRunAll(string):
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
         tree = getTree()
-        print tree
         go()
     else:
         print string + " ",

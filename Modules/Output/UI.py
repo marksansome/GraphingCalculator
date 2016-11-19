@@ -23,10 +23,7 @@ def closeSettings(window, graphCanvas):
 	graphCanvas.configure(height=hTable['height'], width=hTable['width'])
 	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
 	if hTable['mode'] == "radians":
-		#TODO:get rid
-		print "mescouilles"
 		DocumentDictionary.setRad(True)
-		print DocumentDictionary.isRad()
 	else:
 		DocumentDictionary.setRad(False)
 	window.destroy()
@@ -131,7 +128,6 @@ def UI():
 	width = 400
 	HISTORY = ["x"]
 	hTable = readConfig()
-	print hTable
 	variable = StringVar(root)
 	variable.set(HISTORY[0])
 
