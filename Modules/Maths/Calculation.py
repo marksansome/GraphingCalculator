@@ -48,6 +48,7 @@ def substraction(left, right):
 
 
 def div(left, right):
+	# TODO: division by zero to be tested
 	try:
 		result = left / right
 		return result
