@@ -29,7 +29,6 @@ def drawPoints(x, y, height, width, canvas):
 
 def drawLines(height, width, canvas):
 	scale = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
-	print scale
 	horLine= canvas.create_line(0, height/2, width, height/2, fill="black")
 	vertLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
 
