@@ -11,7 +11,8 @@ import tkMessageBox
 def saveSettings(mode):
 	fpt = open('Assets/settings.ini', 'w')
 	fpt.write("[settings]")
-	fpt.write("mode=" + mode + "\n")
+	fpt.write("mode =" + mode + "\n")
+	fpt.write("")
 	fpt.close()
 
 def configureSettings():
