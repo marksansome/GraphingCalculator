@@ -22,6 +22,12 @@ def drawPoints(x, y, height, width, canvas):
 	global currentColour
 	for i in range(len(X) - 1):
 		canvas.create_line(X[i], Y[i], X[i+1], Y[i+1], fill=colours[currentColour], width=2)
+	if Y[0] <= 0:
+		Y[0] = 40
+	if Y[0] >= float(height):
+		Y[0] = height - 40
+	canvas.create_text(X[0] + 30,Y[0] - 10, text= (DocumentDictionary.getType()),fill=colours[currentColour])
+
 	if currentColour == 6:
 		currentColour = 0;
 	else:
@@ -29,7 +35,6 @@ def drawPoints(x, y, height, width, canvas):
 
 def drawLines(height, width, canvas):
 	scale = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
-	print scale
 	horLine= canvas.create_line(0, height/2, width, height/2, fill="black")
 	vertLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
 
