@@ -32,9 +32,7 @@ def drawLines(height, width, canvas):
 	horLine= canvas.create_line(0, height/2, width, height/2, fill="black")
 	vertLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
 
-def graph(canvas):
-	height = 400
-	width = 400
+def graph(canvas, height, width):
 
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
