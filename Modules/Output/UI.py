@@ -22,6 +22,10 @@ def closeSettings(window, graphCanvas):
 	graphCanvas.delete("all")
 	graphCanvas.configure(height=hTable['height'], width=hTable['width'])
 	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
+	if hTable['mode'] == "radians":
+		DocumentDictionary.setRad(True)
+	else:
+		DocumentDictionary.setRad(False)
 	window.destroy()
 
 def configureSettings(graphCanvas):
