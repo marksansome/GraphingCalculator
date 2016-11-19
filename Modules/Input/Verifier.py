@@ -3,6 +3,7 @@
 from Modules.DataStructures.MathFunctions import *
 from Modules.Maths.FillTree import *
 from Modules.Maths.TreeProcessing import *
+import re
 
 eqList = [None] * 100
 
@@ -18,23 +19,32 @@ def validate(equation):
     error = 0
     parentheses = 0
     for i,item in enumerate(eqList):
+        if parentheses < 0:
+            error = 3
+            break
         if item is '':
             continue
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
+            if nextI in [')', '', '/', '*']:
+                error = 4
+                break
         elif item is ')':
             parentheses += -1
-        elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item):
+        elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item) and not match(item):
             if item not in MathFunctions:
-                print item
                 error = 1
+                break
         elif isOperator(item):
             nextI = eqList[i+1]
             if isOperator(nextI):
                 error = 2
+                break
     if parentheses != 0:
         error = 3
+    if not error:
+        print "okay"
     return error
 
 def isFloat(val):
@@ -44,6 +54,11 @@ def isFloat(val):
     except ValueError:
         return False
 
+def match(string):
+    if re.match(r"[0-9]+(.[0-9]+)?x", string):
+        return True
+    else:
+        return False
 
 def runValidate(eq):
     global eqList
@@ -67,7 +82,8 @@ def getErrorMsg(errorInt):
        return "Two consecutive operators"
    if errorInt == 3:
        return "Parentheses mismatch"
-
+   if errorInt == 4:
+       return "Operator/operand mismatch"
 
 #
 #   Create a table indexing higher order of BEDMAS + Factorials
@@ -80,7 +96,7 @@ BEDMAS = {
 }
 
 #
-#   Table containing function names TODO: Remove for centralized table????
+#   Table containing function names
 #
 MathFunctions = {
     'sin' : "",
@@ -102,8 +118,9 @@ MathFunctions = {
 
 parse = []
 def initList():
-	global parse
-	parse = []
+    global parse
+    parse = []
+
 #
 #   parseStringToList
 #   Takes a string and groups each term in the expression into a list.
@@ -112,9 +129,9 @@ def initList():
 #
 def parseStringToList(string):
     initList()
-    parseString = ""
     length = len(string)
 
+    parseString = ""
     index = 0
     sIndex = 0
     #   Begin iterating the string
@@ -152,6 +169,7 @@ def parseStringToList(string):
                 parseString = ""
                 parse.append(string[index])
         index += 1
+
     return parse
 
 #
@@ -218,12 +236,19 @@ def verify(parse):
         while k < parseLength:
             #   Check to see if the current index of the list is an operator
             if parse[k] in BEDMAS[i]:
+                num = parse[k+1]
+                #print num
                 #   Take left and right of the equation
-                myStr = "(" + parse[k-1] + parse[k] + parse[k+1] + ")"
-                #   Remove the three items from the list
-                parse.pop(k-1)
-                parse.pop(k-1)
-                parse.pop(k-1)
+                try:
+                    myStr = "(" + parse[k-1] + parse[k] + parse[k+1] + ")"
+                    #   Remove the three items from the list
+                    parse.pop(k-1)
+                    parse.pop(k-1)
+                    parse.pop(k-1)
+                except IndexError:
+                    print "negative?"
+                    myStr = "(0-" + num + ")"
+
                 #   Combine them into one element
                 parse.insert(k-1,myStr)
                 #   Reset the parse index counter, and look again for same order operations
@@ -249,13 +274,14 @@ def verify(parse):
 #   OUT: (Status INT) Success on 0, (See getErrorMessage)
 #
 def goRunAll(string):
-
     number = runValidate(string)
     if number is 0:
         initList()
         someList = parseStringToList(string)
         parenthesizedString = verify(someList)
         goFill(parenthesizedString)
+        tree = getTree()
+        print tree
         go()
     else:
         print string + " ",
