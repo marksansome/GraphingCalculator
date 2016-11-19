@@ -10,7 +10,6 @@ import math
 def process(tree, nodeIndex):
 	# security layer and domain out of bound handling
 	try:
-		print ("mescouilles")
 		if tree[Tree.leftChildIndex(nodeIndex)] != None:
 			left = float(tree[Tree.leftChildIndex(nodeIndex)])
 		else:
@@ -27,7 +26,7 @@ def process(tree, nodeIndex):
 
 	except ValueError, e:
 		if (e.message == "math domain error"):
-			DocumentDictionary.setMathias(False)
+			DocumentDictionary.setProcessError(False)
 
 
 # calculate parent value given two operands child nodes
@@ -54,20 +53,15 @@ def div(left, right):
 		result = left / right
 		return result
 	except ZeroDivisionError:
+		DocumentDictionary.setProcessError(False)
 		return None
 
 
 def sinus(left, right):
-	#TODO:handle that
 	if DocumentDictionary.isRad():
-		print "here i am"
 		return math.sin(left)
 	else:
-		print "not here"
-		print left
-		tmp = math.radians(left)
-		print tmp
-		return math.sin(tmp)
+		return math.sin(math.radians(left))
 
 
 def cosinus(left, right):

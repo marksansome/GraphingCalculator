@@ -1,11 +1,8 @@
 from Modules.DataStructures.DocumentDictionary import *
 from Modules.DataStructures.Tree import *
 from Modules.Maths.Calculation import *
-# TODO:GET RID
-import traceback
 
 tree = []
-
 
 # Processing the tree and make calculations of the bottom values of the tree
 def postOrderProcess(tree, root):
@@ -27,9 +24,9 @@ def postOrderProcess(tree, root):
 def processLoop(main):
 	tree = main
 	# changing stuff in order to be numbers and no constants or factorials anymore
-	while ((getMathias()) and (not isOperand(tree[1]))):
+	while ((getProcessError()) and (not isOperand(tree[1]))):
 		postOrderProcess(tree, 1)
-	if getMathias():
+	if getProcessError():
 		return tree[1]
 	else:
 		return None
@@ -83,8 +80,8 @@ def iteratesDomain(tree):
 
 	# Cause of int rounding inside "range", we need to set the last value, that's why the + 1 is there
 	for i in range(int((domainUpBound - domainLowBound) / interval) + 1):
-		# TODO:doc next line
-		setMathias(True)
+		# Reinitialising the domain out of bound error "detector"
+		setProcessError(True)
 		preimage.append(j)
 		# Creates a temporary copy of the table representation of the tree so we keep untouched the "main" tree with variables
 		temp = replaceVariables("x", j, table)
@@ -99,7 +96,6 @@ def iteratesDomain(tree):
 
 	# Writing the table of values inside the global dictionary
 	setTableOfValues(tableOfValues)
-	print tableOfValues
 	return tableOfValues
 
 
@@ -114,8 +110,6 @@ def isOperand(item):
 
 # GOOOOOOO LET'S RANCH IT UP, triggers the calculation process
 def go():
-	# TODO:get rid of
-	print "Processing Mathias..."
 	try:
 		docTree = getTree()
 		print docTree
@@ -129,6 +123,5 @@ def go():
 			result = processLoop(docTree)
 			setAnswer(result)
 	except TypeError:
-		# TODO:set error
 		setAnswer(None)
 		setTableOfValues(None)
