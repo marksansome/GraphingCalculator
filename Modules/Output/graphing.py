@@ -22,6 +22,10 @@ def drawPoints(x, y, height, width, canvas):
 	global currentColour
 	for i in range(len(X) - 1):
 		canvas.create_line(X[i], Y[i], X[i+1], Y[i+1], fill=colours[currentColour], width=2)
+	if Y[0] <= 0:
+		Y[0] = 40
+	canvas.create_text(X[0] + 30,Y[0] - 10, text= ("y = "+DocumentDictionary.getType()),fill=colours[currentColour])
+
 	if currentColour == 6:
 		currentColour = 0;
 	else:
