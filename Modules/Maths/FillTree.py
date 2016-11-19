@@ -64,8 +64,6 @@ def parseString(equation, index=1):
 
 def replace():
 	for index,item in enumerate(myList):
-		if re.match(r"[0-9]+(.[0-9]+)?!", item):
-			print "factorial"
 		if item is '':
 			myList[index] = '0'
 

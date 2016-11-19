@@ -10,7 +10,7 @@ import ConfigParser
 #
 def readConfig():
     config = ConfigParser.ConfigParser()
-    config.read('Assets/Settings.ini')
+    config.read('Assets/settings.ini')
     hTable = {}
 
     for sections,key in enumerate(config.sections()):

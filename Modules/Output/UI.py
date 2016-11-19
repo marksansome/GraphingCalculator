@@ -13,8 +13,8 @@ def saveSettings(mode, height, width):
 	fpt = open('Assets/settings.ini', 'w')
 	fpt.write("[settings]\n")
 	fpt.write("mode=" + mode + "\n")
-	fpt.write("height=" +height + "\n");
-	fpt.write("width=" +width + "\n");
+	fpt.write("height=" +height + "\n")
+	fpt.write("width=" +width + "\n")
 	fpt.close()
 
 def closeSettings(window, graphCanvas):
@@ -124,6 +124,7 @@ def UI():
 	width = 400
 	HISTORY = ["x"]
 	hTable = readConfig()
+	print hTable
 	variable = StringVar(root)
 	variable.set(HISTORY[0])
 
