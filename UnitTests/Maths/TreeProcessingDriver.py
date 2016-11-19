@@ -39,7 +39,15 @@ go()
 ans = getAnswer()
 assertEqual("The equation " + eq + " yields " + str(ans)  + ".", ans, math.e + math.pi)
 
+eq = "sin(pi)"
+setRad(True)
+setTree([None, 'sin', 'pi', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None])
+go()
+ans = getAnswer()
+assertEqual("The equation " + eq + " yields " + str(ans)  + ".", ans, 0)
+
 eq = "6!"
+setRad(True)
 setTree([None, '6!', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None])
 go()
 ans = getAnswer()
