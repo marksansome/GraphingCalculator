@@ -23,7 +23,10 @@ def closeSettings(window, graphCanvas):
 	graphCanvas.configure(height=hTable['height'], width=hTable['width'])
 	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
 	if hTable['mode'] == "radians":
+		#TODO:get rid
+		print "mescouilles"
 		DocumentDictionary.setRad(True)
+		print DocumentDictionary.isRad()
 	else:
 		DocumentDictionary.setRad(False)
 	window.destroy()

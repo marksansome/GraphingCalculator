@@ -33,7 +33,7 @@ def validate(equation):
         elif item is ')':
             parentheses += -1
         elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item) and not match(item):
-            if item not in MathFunctions:
+            if item not in MathFunctions and not (item[:len(item)-1].isdigit() and item[len(item)-1] is '!'):
                 error = 1
                 break
         elif isOperator(item):

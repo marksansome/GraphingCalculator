@@ -7,7 +7,7 @@ dictionary = {
     'name' : "",
     'type' : "",
     'answer' : None,
-    'radian': False,
+    'radians': False,
     'scale' : 0.1,
     'lowerBound' : -10,
     'upperBound' : 10,
@@ -60,7 +60,7 @@ def getAnswer():
 #   OUT: (Bool) name.
 #
 def isRad():
-    return dictionary['radian']
+    return dictionary['radians']
 
 #
 #   getScale
@@ -159,7 +159,7 @@ def setAnswer(val):
 #   OUT: NONE.
 #
 def setRad(val):
-    dictionary['answer'] = val
+    dictionary['radians'] = val
 
 #
 #   setScale
