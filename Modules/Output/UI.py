@@ -57,7 +57,7 @@ def configureSettings(graphCanvas):
 	width = apply(OptionMenu, (frame, widthVar) + tuple(WIDTHS))
 	width.grid(row = 3, column = 1)
 	#angle settings
-	MODES = ["radians", "degrees", "gradians"]
+	MODES = ["radians", "degrees"]
 	angleVar = StringVar(frame)
 	angleVar.set(MODES[0])
 	angleLabel = Label(frame, text="Mode",width=6)
