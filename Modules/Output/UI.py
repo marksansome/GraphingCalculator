@@ -21,7 +21,7 @@ def closeSettings(window, graphCanvas):
 	hTable = readConfig()
 	graphCanvas.delete("all")
 	graphCanvas.configure(height=hTable['height'], width=hTable['width'])
-	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
+	drawLines(graphCanvas)
 	if hTable['mode'] == "radians":
 		DocumentDictionary.setRad(True)
 	else:
@@ -83,7 +83,7 @@ def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, ma
 		errorCode = goRunAll(entry)
 		if errorCode is 0:
 			if DocumentDictionary.getAnswer() is None:
-				graph(graphCanvas, int(hTable['height']), int(hTable['width']))
+				graph(graphCanvas)
 				op.append(entry)
 				history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 				history.configure(highlightbackground = "#000000")
@@ -104,7 +104,7 @@ def checkRanges(minRange, maxRange):
 
 def clearGraph(canvas, height, width):
 	canvas.delete("all")
-	drawLines(height, width, canvas)
+	drawLines(canvas)
 
 def showError(string):
 	errorVar.set("ERROR: " + string)
@@ -204,7 +204,7 @@ def UI():
 	#graph
 	graphCanvas = Tkinter.Canvas(root, bg="white", height=int(hTable['height']), width=int(hTable['width']))
 	graphCanvas.grid(row = 4, column = 0)
-	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
+	drawLines(graphCanvas)
 
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(graphCanvas, settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)

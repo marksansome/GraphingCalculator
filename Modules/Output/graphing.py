@@ -2,12 +2,16 @@
 import Tkinter
 import tkMessageBox
 from Modules.DataStructures import DocumentDictionary
+from Modules.Input.Parse import *
 
 colours = ["black", "red", "green", "blue", "cyan", "yellow","magenta"]
 currentColour = 0
 
 #printing points
-def drawPoints(x, y, height, width, canvas):
+def drawPoints(x, y, canvas):
+	hTable = readConfig()
+	width = int(hTable['width'])
+	height = int(hTable['height'])
 	scaleX = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
 	#scaleY = height / ((max(y) - min(y)) / float(DocumentDictionary.getScale())) * 10
 	X = []
@@ -33,7 +37,10 @@ def drawPoints(x, y, height, width, canvas):
 	else:
 		currentColour = currentColour + 1
 
-def drawLines(height, width, canvas):
+def drawLines(canvas):
+	hTable = readConfig()
+	width = int(hTable['width'])
+	height = int(hTable['height'])
 	scale = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
 	horLine= canvas.create_line(0, height/2, width, height/2, fill="black")
 	vertLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
@@ -50,9 +57,9 @@ def drawLines(height, width, canvas):
 	canvas.create_text(width/2 + 10, height - 10, text= DocumentDictionary.getLowerBound(), tag = "cunt")
 
 
-def graph(canvas, height, width):
+def graph(canvas):
 	canvas.delete("cunt")
 	x = DocumentDictionary.getTableOfValues()['xValues']
 	y = DocumentDictionary.getTableOfValues()['yValues']
-	drawLines(height, width, canvas)
-	drawPoints(x, y, height, width, canvas)
+	drawLines(canvas)
+	drawPoints(x, y, canvas)
