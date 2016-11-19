@@ -27,18 +27,20 @@ def validate(equation):
         if item is '(':
             parentheses += 1
             nextI = eqList[i+1]
-            if nextI is ')' or nextI is '':
-                error = 3
+            if nextI in [')', '', '/', '*']:
+                error = 4
                 break
         elif item is ')':
             parentheses += -1
         elif not item.isdigit() and not isFloat(item) and item != 'x' and not isOperator(item) and not isConstant(item) and not match(item):
             if item not in MathFunctions:
                 error = 1
+                break
         elif isOperator(item):
             nextI = eqList[i+1]
             if isOperator(nextI):
                 error = 2
+                break
     if parentheses != 0:
         error = 3
     if not error:
@@ -80,6 +82,8 @@ def getErrorMsg(errorInt):
        return "Two consecutive operators"
    if errorInt == 3:
        return "Parentheses mismatch"
+   if errorInt == 4:
+       return "Operator/operand mismatch"
 
 #
 #   Create a table indexing higher order of BEDMAS + Factorials
@@ -113,6 +117,9 @@ MathFunctions = {
 }
 
 parse = []
+def initList():
+    global parse
+    parse = []
 
 #
 #   parseStringToList
@@ -121,6 +128,7 @@ parse = []
 #   OUT: (List) The parsed expression.
 #
 def parseStringToList(string):
+    initList()
     length = len(string)
 
     parseString = ""
@@ -228,12 +236,19 @@ def verify(parse):
         while k < parseLength:
             #   Check to see if the current index of the list is an operator
             if parse[k] in BEDMAS[i]:
+                num = parse[k+1]
+                #print num
                 #   Take left and right of the equation
-                myStr = "(" + parse[k-1] + parse[k] + parse[k+1] + ")"
-                #   Remove the three items from the list
-                parse.pop(k-1)
-                parse.pop(k-1)
-                parse.pop(k-1)
+                try:
+                    myStr = "(" + parse[k-1] + parse[k] + parse[k+1] + ")"
+                    #   Remove the three items from the list
+                    parse.pop(k-1)
+                    parse.pop(k-1)
+                    parse.pop(k-1)
+                except IndexError:
+                    print "negative?"
+                    myStr = "(0-" + num + ")"
+
                 #   Combine them into one element
                 parse.insert(k-1,myStr)
                 #   Reset the parse index counter, and look again for same order operations
@@ -267,7 +282,7 @@ def goRunAll(string):
         goFill(parenthesizedString)
         tree = getTree()
         print tree
-        #go()
+        go()
     else:
         print string + " ",
         print getErrorMsg(number)

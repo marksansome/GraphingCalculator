@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from Modules.DataStructures.DocumentDictionary import *
+import re
 MathFunctions = ['arcsinh', 'arccosh', 'arctanh', 'sinh', 'cosh', 'tanh', 'sin', 'cos', 'tan', 'arcsin', 'arccos', 'arctan', 'sqrt', 'log', 'ln']
 
 myList = [None] * 50
@@ -61,7 +62,15 @@ def parseString(equation, index=1):
 		parseString(equation[position+1:length-1], index * 2 + 1)
 	return
 
+def replace():
+	for index,item in enumerate(myList):
+		if re.match(r"[0-9]+(.[0-9]+)?!", item):
+			print "factorial"
+		if item is '':
+			myList[index] = '0'
+
 def goFill(eq):
 	initList()
 	parseString(eq)
+	replace()
 	setTree(myList)

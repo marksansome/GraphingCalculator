@@ -10,7 +10,7 @@ import math
 def process(tree, nodeIndex):
 	# security layer and domain out of bound handling
 	try:
-		print ("mescouilles")
+		#print ("mescouilles")
 		if tree[Tree.leftChildIndex(nodeIndex)] != None:
 			left = float(tree[Tree.leftChildIndex(nodeIndex)])
 		else:
