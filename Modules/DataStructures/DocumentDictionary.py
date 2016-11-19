@@ -18,14 +18,14 @@ dictionary = {
     },
     'tree' : None,
     'isError' : "",
-	'processError' : True
+    'processError' : True
 }
 
 def setProcessError(whatever):
-	dictionary['processError'] = whatever
+    dictionary['processError'] = whatever
 
 def getProcessError():
-	return dictionary['processError']
+    return dictionary['processError']
 #
 #   getName
 #   Get the value of name in the document dictionary.

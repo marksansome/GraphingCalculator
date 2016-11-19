@@ -1,4 +1,4 @@
- # File responsible for managing calculations at the finest (i.e bottom of the tree)
+# File responsible for managing calculations at the finest (i.e bottom of the tree)
 from __future__ import division
 from Modules.DataStructures import Tree
 from Modules.DataStructures import DocumentDictionary
