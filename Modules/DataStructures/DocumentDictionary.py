@@ -18,14 +18,14 @@ dictionary = {
     },
     'tree' : None,
     'isError' : "",
-	'mathias' : True
+	'processError' : True
 }
-#TODO:remove MATHIAS SHIT THIS GUY SUCKS BUT DOES THE COMPLICATED STUFF
-def setMathias(whatever):
-	dictionary['mathias'] = whatever
 
-def getMathias():
-	return dictionary['mathias']
+def setProcessError(whatever):
+	dictionary['processError'] = whatever
+
+def getProcessError():
+	return dictionary['processError']
 #
 #   getName
 #   Get the value of name in the document dictionary.

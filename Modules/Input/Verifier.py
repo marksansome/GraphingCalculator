@@ -80,7 +80,7 @@ BEDMAS = {
 }
 
 #
-#   Table containing function names TODO: Remove for centralized table????
+#   Table containing function names
 #
 MathFunctions = {
     'sin' : "",
