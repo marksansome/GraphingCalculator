@@ -228,7 +228,7 @@ def UI():
 	operator[18] = Button(frame, text='^x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"^()"), bg = "#333333", fg ="#ffffff", font = boldFont)
 	operator[19] = Button(frame, text='1/x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"1/()"), bg = "#333333", fg ="#ffffff", font = boldFont)
 	operator[20] = Button(frame, text='10^x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"10^()"), bg = "#333333", fg ="#ffffff", font = boldFont)
-	operator[21] = Button(frame, text='e^x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,", bg = ""e^()"), bg = "#333333", fg ="#ffffff", font = boldFont)
+	operator[21] = Button(frame, text='e^x', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"e^()"), bg = "#333333", fg ="#ffffff", font = boldFont)
 	operator[22] = Button(frame, text='pi', width = BUTTON_WIDTH, command = lambda: AddToEntry(entry,"3.14"), bg = "#333333", fg ="#ffffff", font = boldFont)
 	operator[23] = Button(frame, text='!', width = BUTTON_WIDTH, command = lambda: AddToEntry(entry,"!"), bg = "#333333", fg = "#ffffff", font = boldFont)
 	operator[24] = Button(frame, text='log(x)', width = BUTTON_WIDTH, command = lambda: AddToEntryBrackets(entry,"log()"),bg = "#333333", fg = "#ffffff", font = boldFont)
