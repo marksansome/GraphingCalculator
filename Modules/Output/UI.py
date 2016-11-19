@@ -4,18 +4,31 @@ from Modules.Output.graphing import *
 from Modules.Input.Verifier import *
 from Modules.Maths.FillTree import *
 from Modules.DataStructures import DocumentDictionary
+from Modules.Input.Parse import *
 
 import tkFont
 import tkMessageBox
 
-def saveSettings(mode):
+def saveSettings(mode, height, width):
 	fpt = open('Assets/settings.ini', 'w')
-	fpt.write("[settings]")
-	fpt.write("mode =" + mode + "\n")
-	fpt.write("")
+	fpt.write("[settings]\n")
+	fpt.write("mode=" + mode + "\n")
+	fpt.write("height=" +height + "\n");
+	fpt.write("width=" +width + "\n");
 	fpt.close()
 
-def configureSettings():
+def closeSettings(window, graphCanvas):
+	hTable = readConfig()
+	graphCanvas.delete("all")
+	graphCanvas.configure(height=hTable['height'], width=hTable['width'])
+	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
+	if hTable['mode'] == "radians":
+		DocumentDictionary.setRad(True)
+	else:
+		DocumentDictionary.setRad(False)
+	window.destroy()
+
+def configureSettings(graphCanvas):
 	SETTINGS = []
 	fpt = open('Assets/settings.ini', 'r')
 	dataFile = fpt.read()
@@ -27,12 +40,28 @@ def configureSettings():
 	frame = Frame(window, bg="#f2f2f2", height=400, width=300)
 	frame.pack()
 	#save/exit  button
-	saveButton = Button(frame, text = "Save", command = lambda: saveSettings(angleVar.get()))
+	saveButton = Button(frame, text = "Save", command = lambda: saveSettings(angleVar.get(), heightVar.get(), widthVar.get()))
 	saveButton.grid(row = 0, column = 0)
-	exitButton = Button(frame, text = "Exit", command = window.destroy)
+	exitButton = Button(frame, text = "Exit", command = lambda: closeSettings(window, graphCanvas))
 	exitButton.grid(row = 0, column = 1)
+	#height
+	HEIGHTS = ["200","250","300","350","400", "450"]
+	heightVar = StringVar(frame)
+	heightVar.set(HEIGHTS[4])
+	heightLabel = Label(frame, text="Height",width=6)
+	heightLabel.grid(row = 2, column = 0)
+	height = apply(OptionMenu, (frame, heightVar) + tuple(HEIGHTS))
+	height.grid(row = 2, column = 1)
+	#width
+	WIDTHS = ["200","300","400","500","600","700","800"]
+	widthVar = StringVar(frame)
+	widthVar.set(WIDTHS[2])
+	widthLabel = Label(frame, text="Width",width=6)
+	widthLabel.grid(row = 3, column = 0)
+	width = apply(OptionMenu, (frame, widthVar) + tuple(WIDTHS))
+	width.grid(row = 3, column = 1)
 	#angle settings
-	MODES = ["radians", "degrees", "gradians"]
+	MODES = ["radians", "degrees"]
 	angleVar = StringVar(frame)
 	angleVar.set(MODES[0])
 	angleLabel = Label(frame, text="Mode",width=6)
@@ -44,6 +73,7 @@ def configureSettings():
 
 def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, maxRange, interval):
 	boldFont = tkFont.Font(weight = "bold")
+	hTable = readConfig()
 	if checkRanges(minRange, maxRange):
 		DocumentDictionary.setUpperBound(maxRange)
 		DocumentDictionary.setLowerBound(minRange)
@@ -53,7 +83,7 @@ def generateGraph(graphCanvas, settingsFrame, op, var, root, entry, minRange, ma
 		errorCode = goRunAll(entry)
 		if errorCode is 0:
 			if DocumentDictionary.getAnswer() is None:
-				graph(graphCanvas)
+				graph(graphCanvas, int(hTable['height']), int(hTable['width']))
 				op.append(entry)
 				history = apply(OptionMenu, (settingsFrame, var) + tuple(op))
 				history.configure(highlightbackground = "#000000")
@@ -97,7 +127,7 @@ def UI():
 	height = 400
 	width = 400
 	HISTORY = ["x"]
-
+	hTable = readConfig()
 	variable = StringVar(root)
 	variable.set(HISTORY[0])
 
@@ -153,12 +183,12 @@ def UI():
 	historyButton.configure(highlightbackground = "#000000")
 
 	#clear graph
-	clearGraphButton = Button(settingsFrame, text="Clear Graph", width = BUTTON_WIDTH * 2, command = lambda: clearGraph(graphCanvas, height, width),bg = "#d6d6c2", font = boldFont)
+	clearGraphButton = Button(settingsFrame, text="Clear Graph", width = BUTTON_WIDTH * 2, command = lambda: clearGraph(graphCanvas, int(hTable['height']), int(hTable['width'])),bg = "#d6d6c2", font = boldFont)
 	clearGraphButton.grid(row = 0, column = 2)
 	clearGraphButton.configure(highlightbackground = "#000000")
 
 	#settings Button
-	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH + 1, command = lambda: configureSettings(),bg = "#d6d6c2", font = boldFont)
+	settingsButton = Button(settingsFrame, text="Settings", width = BUTTON_WIDTH + 1, command = lambda: configureSettings(graphCanvas),bg = "#d6d6c2", font = boldFont)
 	settingsButton.configure(highlightbackground = "#000000")
 	settingsButton.grid(row = 0, column = 3)
 	exitButton = Button(settingsFrame, text = "Exit Program", command = root.destroy,bg = "#d6d6c2", font = boldFont)
@@ -172,9 +202,9 @@ def UI():
 	answerLabel = Label(answerFrame, textvariable = answer, font = boldFont, bg = "#f2f2f2")
 
 	#graph
-	graphCanvas = Tkinter.Canvas(root, bg="white", height=height, width=width)
+	graphCanvas = Tkinter.Canvas(root, bg="white", height=int(hTable['height']), width=int(hTable['width']))
 	graphCanvas.grid(row = 4, column = 0)
-	drawLines(height, width, graphCanvas)
+	drawLines(int(hTable['height']), int(hTable['width']), graphCanvas)
 
 	goButton = Button(entryFrame, text = "Go", bg = "#333333", fg ="#ffffff", font = boldFont, command = lambda: generateGraph(graphCanvas, settingsFrame, HISTORY, variable, root, entry.get(), minRange.get(), maxRange.get(), interval.get()))
 	entryFrame.grid(row = 0, column = 0)
