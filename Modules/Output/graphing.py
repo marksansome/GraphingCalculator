@@ -12,18 +12,18 @@ def drawPoints(x, y, canvas):
 	hTable = readConfig()
 	width = int(hTable['width'])
 	height = int(hTable['height'])
-	scaleX = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
-	#scaleY = height / ((max(y) - min(y)) / float(DocumentDictionary.getScale())) * 10
+	scale = width / (float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound())))
 	X = []
 	Y = []
 	for i in range(len(x)):
 		if isinstance(y[i], (int, float)):
-			X.append(x[i] * scaleX + width/2)
-			Y.append(-y[i] * scaleX + height/2)
+			X.append(x[i] * scale + width/2)
+			Y.append(-y[i] * scale + height/2)
 			#draws points, uncomment to enable
 			#canvas.create_oval(X[i], Y[i], X[i], Y[i])
 
 	global currentColour
+
 	for i in range(len(X) - 1):
 		canvas.create_line(X[i], Y[i], X[i+1], Y[i+1], fill=colours[currentColour], width=2)
 	if Y[0] <= 0:
@@ -41,7 +41,7 @@ def drawLines(canvas):
 	hTable = readConfig()
 	width = int(hTable['width'])
 	height = int(hTable['height'])
-	scale = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale())) * 10
+	scale = width / ((float(DocumentDictionary.getUpperBound()) - (float(DocumentDictionary.getLowerBound()))) / float(DocumentDictionary.getScale()))
 	horLine= canvas.create_line(0, height/2, width, height/2, fill="black")
 	vertLine = canvas.create_line(width/2, 0, width/2, height, fill="black")
 
